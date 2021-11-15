@@ -30,7 +30,7 @@ spec:
     kind: Deployment
   - group: ''
     kind: Service
-  - group: ''
+  - group: 'route.openshift.io'
     kind: Route 
    
   orphanedResources:
