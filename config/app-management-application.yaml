@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps-management
+  namespace: openshift-gitops
+spec:
+  project: apps-management
+
+  source:
+    repoURL: https://github.com/jstakun/openshift-gitops.git
+    targetRevision: HEAD
+    path: manifests
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-gitops

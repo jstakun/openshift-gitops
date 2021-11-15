@@ -1,0 +1,57 @@
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-stage-admin
+  namespace: sample-app-stage
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-admins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-prod-admin
+  namespace: sample-app-prod
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-admins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-test-admin
+  namespace: sample-app-test
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-admins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-cicd-admin
+  namespace: sample-app-cicd
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-admins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+
