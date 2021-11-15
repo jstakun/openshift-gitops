@@ -1,0 +1,52 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hello-quarkus
+  labels:
+    app: hello-quarkus
+    app.kubernetes.io/component: hello-quarkus
+    app.kubernetes.io/instance: hello-quarkus
+    app.kubernetes.io/part-of: hello-quarkus-app
+    app.openshift.io/runtime: quarkus
+    app.openshift.io/runtime-namespace: hello-quarkus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-quarkus
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hello-quarkus
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      containers:
+        - name: hello-quarkus
+          image: quay.io/jstakun/hello-quarkus:0.5
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 96Mi
+            requests:
+              cpu: 100m
+              memory: 32Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
