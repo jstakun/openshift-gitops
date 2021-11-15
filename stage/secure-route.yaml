@@ -1,0 +1,15 @@
+nd: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: hello-quarkus-staging
+spec:
+  to:
+    kind: Service
+    name: hello-quarkus-http
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
