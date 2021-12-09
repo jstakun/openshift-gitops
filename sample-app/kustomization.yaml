@@ -1,4 +1,4 @@
-ources:
+resources:
 - deployment.yaml
 - service.yaml
 - secure-route.yaml
