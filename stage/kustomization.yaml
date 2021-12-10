@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - ../sample-app/
 images:
-- digest: sha256:76fa959d810a64be37da362bfbb378c6a6880a365248fbe824982bc6f89595c4
-  name: quay.io/jstakun/hello-quarkus:latest
+- name: quay.io/jstakun/hello-quarkus:latest
   newName: quay.io/jstakun/hello-quarkus-dev
+  newTag: latest
