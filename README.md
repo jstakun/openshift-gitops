@@ -48,7 +48,7 @@ spec:
 
 If you want to use quay.io image registry to push images from the pipeline here are the steps to take:
 
-1. Create robot account in quay
+1. Create robot account in quay.io
 
 2. Create basic auth secret in openshift with robot account credentials
 
