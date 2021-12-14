@@ -27,9 +27,9 @@ If you want to play with Tekton CI pipeline which has been installed in sample-a
 
 1. Install OpenShift Pipelines operator
 
-2. Setup image registry so that pipeline can push images to it and deployments can pull from it
+2. Setup image registry so that pipeline can push images to it and deployments can pull from it. Check below for sample quay.io setup.
 
-3. Setup git repository where you should clone this repo
+3. Setup git repository where you should clone this repo. Check below for sample github setup.
 
 4. Increase resources for build container in buildah cluster task
 ```
@@ -45,4 +45,50 @@ spec:
           cpu: 4 
 ```
 5. Modify maven mirror settings in maven-settings configmap and in build-image pipeline task (BUILD_EXTRA_ARGS parameter) to point to your maven repo
+
+If you want to use quay.io image registry to push images from the pipeline here are the steps to take:
+
+1. Create robot account in quay
+
+2. Create basic auth secret in openshift with robot account credentials
+
+```
+kind: Secret
+apiVersion: v1
+metadata:
+  name: quay-creds
+  annotations:
+    tekton.dev/docker-0: 'https://quay.io'
+data:
+  password: ROBOT_ACCOUNT_PASSWORD
+  username: ROBOT_ACCOUNT_NAME
+type: kubernetes.io/basic-auth
+```
+
+3. Add secret to pipeline service account in namespace where pipeline will be executed
+
+```
+oc patch serviceaccount pipeline -p '{"secrets": [{"name": "quay-creds"}]}'
+```
+
+If you want to use github as source code repository here are the steps to take:
+
+1. Create token in github with repo scope
+
+2. Create github-creds opaque secret
+
+```
+kind: Secret
+apiVersion: v1
+metadata:
+  name: github-creds
+data:
+  .git-credentials: https://USERNAME:TOKEN@github.com
+  .gitconfig: |
+    [credential "https://github.com"]
+      helper = store
+type: Opaque
+```
+
+3. When staring new pipeline select github-creds secret in git-basic-auth workspace 
 
