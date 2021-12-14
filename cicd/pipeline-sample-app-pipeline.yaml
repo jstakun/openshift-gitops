@@ -133,7 +133,7 @@ spec:
         - name: BUILD_EXTRA_ARGS
           value: >-
             --build-arg
-            MAVEN_MIRROR_URL=http://nexus.demo-cicd.svc:8081/repository/maven-public/
+            MAVEN_MIRROR_URL=https://repo1.maven.org/maven2/
       runAfter:
         - unit-test
       taskRef:
