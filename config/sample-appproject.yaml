@@ -32,6 +32,16 @@ spec:
     kind: Service
   - group: 'route.openshift.io'
     kind: Route 
+  - group: ''
+    kind: ConfigMap
+  - group: ''
+    kind: PersistentVolumeClaim
+  - group: ''
+    kind: Secret
+  - group: 'tekton.dev'
+    kind: Task
+  - group: 'tekton.dev'
+    kind: Pipeline 
    
   orphanedResources:
     warn: false
