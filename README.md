@@ -23,16 +23,16 @@ Sample application manifests (namespace, role binding, ...) are stored in https:
 
 5. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
-6. If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
+If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
 
-6.1 Install OpenShift Pipelines operator
+1. Install OpenShift Pipelines operator
 
-6.2 Setup image registry so that pipeline can push images to it and deployments can pull from it
+2. Setup image registry so that pipeline can push images to it and deployments can pull from it
 
-6.3 Setup git repository where you should clone this repo
+3. Setup git repository where you should clone this repo
 
-6.4 Increase resources for build container in buildah cluster task
-
+4. Increase resources for build container in buildah cluster task
+```
 spec:
   steps:
     name: build
@@ -43,6 +43,6 @@ spec:
         limits:
           memory: 8Gi
           cpu: 4 
-
-6.5 Modify maven mirror settings in maven-settings configmap and in build-image pipeline task (BUILD_EXTRA_ARGS parameter) 
+```
+5. Modify maven mirror settings in maven-settings configmap and in build-image pipeline task (BUILD_EXTRA_ARGS parameter) to point to your maven repo
 
