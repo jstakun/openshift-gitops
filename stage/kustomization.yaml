@@ -1,2 +1,8 @@
-bases:
-  - ../sample-app/
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../sample-app/
+images:
+- name: quay.io/jstakun/hello-quarkus:latest
+  newName: quay.io/jstakun/hello-quarkus-dev
+  newTag: latest
