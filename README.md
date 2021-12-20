@@ -92,3 +92,28 @@ type: Opaque
 
 3. When staring new pipeline select github-creds secret in git-basic-auth workspace 
 
+If you want to test security pipelines following steps are required 
+
+1. Install Advanced Cluster Security for Kubernetes and configure it
+
+2. Generate API token with Continuous Integration role
+
+3. Create secret which will be referenced in the pipeline:
+
+```
+kind: Secret
+apiVersion: v1
+metadata:
+  name: roxsecrets
+data:
+  rox_api_token: API_TOKEN
+  rox_central_endpoint: central.stackrox.svc.cluster.local:443
+type: Opaque
+```
+
+
+
+
+
+
+

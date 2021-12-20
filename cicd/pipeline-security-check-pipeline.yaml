@@ -1,0 +1,60 @@
+﻿apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: security-check-pipeline
+spec:
+  params:
+    - default: roxsecrets
+      name: api_secret
+      type: string
+    - default: 'quay.io/jstakun/hello-quarkus-dev:latest'
+      name: image_url
+      type: string
+    - default: >-
+        https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/deployment.yaml
+      name: deployment_url
+      type: string
+  tasks:
+    - name: rox-image-check
+      params:
+        - name: rox_central_endpoint
+          value: $(params.api_secret)
+        - name: rox_api_token
+          value: $(params.api_secret)
+        - name: image
+          value: $(params.image_url)
+      taskRef:
+        kind: ClusterTask
+        name: rox-image-check
+    - name: rox-image-scan
+      params:
+        - name: rox_central_endpoint
+          value: $(params.api_secret)
+        - name: rox_api_token
+          value: $(params.api_secret)
+        - name: image
+          value: $(params.image_url)
+        - name: output_format
+          value: table
+      taskRef:
+        kind: ClusterTask
+        name: rox-image-scan
+    - name: rox-deployment-check-remote
+      params:
+        - name: rox_central_endpoint
+          value: $(params.api_secret)
+        - name: rox_api_token
+          value: $(params.api_secret)
+        - name: file-url
+          value: $(params.deployment_url)
+      runAfter:
+        - rox-image-check
+        - rox-image-scan
+      taskRef:
+        kind: ClusterTask
+        name: rox-deployment-check-remote
+      workspaces:
+        - name: deployfiles
+          workspace: workspace
+  workspaces:
+    - name: workspace
