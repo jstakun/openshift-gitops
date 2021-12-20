@@ -1,0 +1,57 @@
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-stage-viewer
+  namespace: sample-app-stage
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-prod-viewer
+  namespace: sample-app-prod
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-test-admin
+  namespace: sample-app-viewer
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sample-app-cicd-viewer
+  namespace: sample-app-cicd
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: sample-app-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+
