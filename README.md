@@ -23,7 +23,7 @@ Sample application manifests (namespace, role binding, ...) are stored in https:
 
 5. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
-6. There are 2 role bindings created for each project with view and admin roles which are bound to sample-app-viewer and sample-app-admin groups. If you want to use them you must create these groups
+6. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewer and sample-app-admin groups. If you want to use them you must create these groups
 
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
 
@@ -61,7 +61,7 @@ metadata:
   name: quay-creds
   annotations:
     tekton.dev/docker-0: 'https://quay.io'
-data:
+stringData:
   password: ROBOT_ACCOUNT_PASSWORD
   username: ROBOT_ACCOUNT_NAME
 type: kubernetes.io/basic-auth
@@ -84,7 +84,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: github-creds
-data:
+stringData:
   .git-credentials: https://USERNAME:TOKEN@github.com
   .gitconfig: |
     [credential "https://github.com"]
@@ -107,7 +107,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: roxsecrets
-data:
+stringData:
   rox_api_token: API_TOKEN
   rox_central_endpoint: central.stackrox.svc.cluster.local:443
 type: Opaque
