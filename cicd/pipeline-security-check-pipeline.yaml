@@ -24,7 +24,7 @@ spec:
         - name: image
           value: $(params.image_url)
       taskRef:
-        kind: ClusterTask
+        kind: Task
         name: rox-image-check
     - name: rox-image-scan
       params:
@@ -37,7 +37,7 @@ spec:
         - name: output_format
           value: table
       taskRef:
-        kind: ClusterTask
+        kind: Task
         name: rox-image-scan
     - name: rox-deployment-check-remote
       params:
@@ -51,7 +51,7 @@ spec:
         - rox-image-check
         - rox-image-scan
       taskRef:
-        kind: ClusterTask
+        kind: Task
         name: rox-deployment-check-remote
       workspaces:
         - name: deployfiles

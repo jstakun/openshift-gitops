@@ -23,6 +23,8 @@ Sample application manifests (namespace, role binding, ...) are stored in https:
 
 5. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
+6. There 2 role bindings created for each project with view and admin roles which are bound to sample-app-viewer and sample-app-admin groups. If you want to use them you must create these groups
+
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
 
 1. Install OpenShift Pipelines operator
