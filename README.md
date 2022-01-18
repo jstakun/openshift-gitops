@@ -23,7 +23,7 @@ Sample application manifests (namespace, role binding, ...) are stored in https:
 
 5. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
-6. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewer and sample-app-admin groups. If you want to use them you must create these groups
+6. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
 
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
 
@@ -112,8 +112,12 @@ stringData:
   rox_central_endpoint: central.stackrox.svc.cluster.local:443
 type: Opaque
 ```
+If you want to deploy samle nexus repo you can use following deployment
 
-
+```
+oc create -f https://raw.githubusercontent.com/jstakun/openshift-cicd-demo/main/infra/nexus.yaml
+```
+Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
 
 
 
