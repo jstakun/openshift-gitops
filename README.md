@@ -112,7 +112,7 @@ stringData:
   rox_central_endpoint: central.stackrox.svc.cluster.local:443
 type: Opaque
 ```
-If you want to deploy samle nexus repo you can use following deployment
+If you want to deploy sample nexus repo you can use following deployment
 
 ```
 oc create -f https://raw.githubusercontent.com/jstakun/openshift-cicd-demo/main/infra/nexus.yaml
