@@ -27,7 +27,7 @@ spec:
     - description: The commit SHA
       name: commit
   steps:
-    - image: 'docker.io/alpine/git:v2.26.2'
+    - image: 'docker.io/alpine/git:v2.32.0'
       name: git-clone
       resources: {}
       script: |
@@ -58,7 +58,7 @@ spec:
           value: $(workspaces.basic-auth.path)
         - name: HOME
           value: /root
-      image: 'docker.io/alpine/git:v2.26.2'
+      image: 'docker.io/alpine/git:v2.32.0'
       name: git-commit
       resources: {}
       script: >
