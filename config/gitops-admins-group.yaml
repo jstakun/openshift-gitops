@@ -3,5 +3,5 @@ kind: Group
 metadata:
   name: gitops-admins
 users:
-  - admin1
-  - admin2
+  - kubeadmin
+  - gitops-admin

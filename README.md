@@ -11,7 +11,7 @@ Initial setup
 
 Sample application onboarding
 
-Sample application manifests (namespace, role binding, ...) are stored in https://github.com/jstakun/openshift-gitops.git in manifests directory
+Sample application manifests (namespace, role binding, ...) are stored in the [manifests](https://github.com/jstakun/openshift-gitops/tree/main/manifests) directory
 
 1. Create sample-app-admins group in OCP
 
@@ -46,7 +46,7 @@ spec:
           memory: 8Gi
           cpu: 4 
 ```
-5. Modify maven mirror settings in maven-settings configmap and in build-image pipeline task (BUILD_EXTRA_ARGS parameter) to point to your maven repo
+5. Optionally modify maven mirror settings in maven-settings configmap and in build-image pipeline task in the sample-app pipeline (BUILD_EXTRA_ARGS parameter) to point to your maven repo
 
 If you want to use quay.io image registry to push images from the pipeline here are the steps to take:
 
