@@ -1,0 +1,181 @@
+﻿apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: sample-app-secure
+spec:
+  params:
+    - default: 'https://github.com/jstakun/quarkus-tracing.git'
+      name: APP_SOURCE_GIT
+      type: string
+    - default: master
+      name: APP_SOURCE_REVISION
+      type: string
+    - default: 'https://github.com/jstakun/openshift-gitops.git'
+      name: APP_MANIFESTS_GIT
+      type: string
+    - default: latest
+      name: APP_IMAGE_TAG
+      type: string
+    - default: quay.io/jstakun/hello-quarkus-dev
+      name: APP_IMAGE
+      type: string
+    - default: http://nexus.demo-cicd.svc:8081/repository/maven-public/
+      name: MAVEN_MIRROR_URL
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: $(params.APP_SOURCE_GIT)
+        - name: revision
+          value: $(params.APP_SOURCE_REVISION)
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '01'
+        - name: sslVerify
+          value: 'false'
+        - name: deleteExisting
+          value: 'true'
+        - name: verbose
+          value: 'true'
+        - name: gitInitImage
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:da1aedf0b17f2b9dd2a46edc93ff1c0582989414b902a28cd79bad8a035c9ea4
+        - name: userHome
+          value: /tekton/home
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: workspace
+    - name: unit-test
+      params:
+        - name: MAVEN_IMAGE
+          value: >-
+            gcr.io/cloud-builders/mvn@sha256:57523fc43394d6d9d2414ee8d1c85ed7a13460cbb268c3cd16d28cfb3859e641
+        - name: GOALS
+          value:
+            - package
+        - name: PROXY_PROTOCOL
+          value: http
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: workspace
+        - name: maven-settings
+          workspace: maven-settings
+    - name: skopeo-copy
+      params:
+        - name: srcImageURL
+          value: >-
+            docker://image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(context.pipeline.name):$(params.APP_IMAGE_TAG)
+        - name: destImageURL
+          value: 'docker://$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
+        - name: srcTLSverify
+          value: 'false'
+        - name: destTLSverify
+          value: 'true'
+      runAfter:
+        - build-image
+      taskRef:
+        kind: ClusterTask
+        name: skopeo-copy
+      workspaces:
+        - name: images-url
+          workspace: images-url
+    - name: git-update-deployment
+      params:
+        - name: GIT_REPOSITORY
+          value: $(params.APP_MANIFESTS_GIT)
+        - name: CURRENT_IMAGE
+          value: '$(params.APP_IMAGE):latest'
+        - name: NEW_IMAGE
+          value: $(params.APP_IMAGE)
+        - name: KUSTOMIZATION_PATH
+          value: stage
+        - name: GIT_REVISION
+          value: main
+        - name: NEW_TAG
+          value: $(params.APP_IMAGE_TAG)
+      runAfter:
+        - rox-image-check
+        - rox-image-scan
+      taskRef:
+        kind: Task
+        name: git-update-deployment
+      workspaces:
+        - name: workspace
+          workspace: workspace
+        - name: basic-auth
+          workspace: git-basic-auth
+    - name: build-image
+      params:
+        - name: IMAGE
+          value: >-
+            image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(context.pipeline.name):$(params.APP_IMAGE_TAG)
+        - name: BUILDER_IMAGE
+          value: >-
+            registry.redhat.io/rhel8/buildah@sha256:99cae35f40c7ec050fed3765b2b27e0b8bbea2aa2da7c16408e2ca13c60ff8ee
+        - name: STORAGE_DRIVER
+          value: vfs
+        - name: DOCKERFILE
+          value: ./Containerfile.staged.distroless
+        - name: CONTEXT
+          value: .
+        - name: TLSVERIFY
+          value: 'true'
+        - name: FORMAT
+          value: oci
+        - name: BUILD_EXTRA_ARGS
+          value: >-
+            --build-arg
+            MAVEN_MIRROR_URL=$(params.MAVEN_MIRROR_URL)
+      runAfter:
+        - unit-test
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      workspaces:
+        - name: source
+          workspace: workspace
+    - name: rox-image-check
+      params:
+        - name: rox_central_endpoint
+          value: roxsecrets
+        - name: rox_api_token
+          value: roxsecrets
+        - name: image
+          value: '$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
+      runAfter:
+        - skopeo-copy
+      taskRef:
+        kind: Task
+        name: rox-image-check
+    - name: rox-image-scan
+      params:
+        - name: rox_central_endpoint
+          value: roxsecrets
+        - name: rox_api_token
+          value: roxsecrets
+        - name: image
+          value: '$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
+        - name: output_format
+          value: table
+      runAfter:
+        - skopeo-copy
+      taskRef:
+        kind: Task
+        name: rox-image-scan
+  workspaces:
+    - name: workspace
+    - name: maven-settings
+    - name: images-url
+    - name: git-basic-auth

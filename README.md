@@ -17,7 +17,7 @@ Sample application manifests (namespace, role binding, ...) are stored in the [m
 
 1. Create sample-app-admins group in OCP
 
-2. Synchronize apps-management ArgoCD application
+2. Synchronize apps-management application in ArgoCD UI/CLI
 
 3. oc create -f config/sample-appproject.yaml
 
