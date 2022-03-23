@@ -106,8 +106,7 @@ spec:
         - name: NEW_TAG
           value: $(params.APP_IMAGE_TAG)
       runAfter:
-        - rox-image-check
-        - rox-image-scan
+        - sign-image
       taskRef:
         kind: Task
         name: git-update-deployment
@@ -174,6 +173,20 @@ spec:
       taskRef:
         kind: Task
         name: rox-image-scan
+    - name: sign-image
+      params:
+        - name: cosignkey
+          value: signing-secrets
+        - name: image
+          value: '$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
+        - name: namespace
+          value: $(context.pipelineRun.namespace)
+      runAfter:
+        - rox-image-check
+        - rox-image-scan
+      taskRef:
+        kind: Task
+        name: cosign
   workspaces:
     - name: workspace
     - name: maven-settings

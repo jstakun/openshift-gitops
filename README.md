@@ -48,7 +48,7 @@ spec:
           memory: 8Gi
           cpu: 4 
 ```
-5. Optionally modify maven mirror settings in maven-settings configmap and in build-image pipeline task in the sample-app pipeline (BUILD_EXTRA_ARGS parameter) to point to your maven repo
+5. Optionally modify maven mirror settings in maven-settings configmap to point to your maven repo
 
 If you want to use quay.io image registry to push images from the pipeline here are the steps to take:
 
@@ -121,6 +121,11 @@ oc create -f https://raw.githubusercontent.com/jstakun/openshift-cicd-demo/main/
 ```
 Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
 
+If you want to play with image signing you must install locally cosign and run following command
+```
+cosign generate-key-pair k8s://sample-app-cicd/signing-secrets
+```
+This command must be executed in context of your project where pipeline is executed so that signing secret can be stored there and accessed by pipeline task when it will be executed
 
 
 
