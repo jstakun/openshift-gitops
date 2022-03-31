@@ -6,11 +6,11 @@ Initial setup
 2. Edit argocd-rbac-cm config map in openshift-gitops project and set policy.default: ''
 
 3. Create gitops-admins group in OCP
+
+4. Setup app managment ArgoCD application 
 ```
-4. oc create -f config/app-management-appproject.yaml
-```
-```
-5. oc create -f config/app-management-application.yaml
+oc create -f config/app-management-appproject.yaml
+oc create -f config/app-management-application.yaml
 ```
 Sample application onboarding
 
