@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: sample-app
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Sample Project
+
+  sourceRepos:
+  - 'https://github.com/jstakun/openshift-gitops.git'
+  
+  destinations:
+  - namespace: 'sample-app-stage'
+    server: https://kubernetes.default.svc
+  - namespace: 'sample-app-test'
+    server: https://kubernetes.default.svc
+  - namespace: 'sample-app-prod'
+    server: https://kubernetes.default.svc
+  - namespace: 'sample-app-cicd'
+    server: https://kubernetes.default.svc
+
+  #clusterResourceWhitelist:
+  #- group: ''
+  #  kind: Namespace
+ 
+  namespaceResourceWhitelist:
+  - group: 'apps'
+    kind: Deployment
+  - group: ''
+    kind: Service
+  - group: 'route.openshift.io'
+    kind: Route 
+  - group: ''
+    kind: ConfigMap
+  - group: ''
+    kind: PersistentVolumeClaim
+  - group: ''
+    kind: Secret
+  - group: 'tekton.dev'
+    kind: Task
+  - group: 'tekton.dev'
+    kind: Pipeline 
+   
+  orphanedResources:
+    warn: false
+
+  roles:
+  - name: read-only
+    description: Read-only privileges to sample-app
+    policies:
+    - p, proj:sample-app:read-only, applications, get, sample-app/*, allow
+    groups:
+    - sample-app-admins
+
+  - name: ci-role
+    description: Sync privileges for sample-app
+    policies:
+    - p, proj:sample-app:ci-role, applications, sync, sample-app/*, allow
+    groups:
+    - sample-app-admins
