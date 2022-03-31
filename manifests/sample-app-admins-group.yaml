@@ -3,5 +3,6 @@ kind: Group
 metadata:
   name: sample-app-admins
 users:
+  - user1
   - developer
   - sample-app-admin
