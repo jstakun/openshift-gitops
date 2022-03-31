@@ -73,6 +73,7 @@ type: kubernetes.io/basic-auth
 oc patch serviceaccount pipeline -p '{"secrets": [{"name": "quay-creds"}]}'
 ```
 
+---
 If you want to use github as source code repository here are the steps to take:
 
 1. Create token in github with repo scope
@@ -113,6 +114,8 @@ stringData:
   rox_central_endpoint: central.stackrox.svc.cluster.local:443
 type: Opaque
 ```
+
+---
 If you want to deploy sample nexus repo you can use following deployment
 
 ```
