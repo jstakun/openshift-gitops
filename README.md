@@ -12,6 +12,7 @@ Initial setup
 oc create -f config/app-management-appproject.yaml
 oc create -f config/app-management-application.yaml
 ```
+---
 Sample application onboarding
 
 Sample application manifests (namespace, role binding, ...) are stored in the [manifests](https://github.com/jstakun/openshift-gitops/tree/main/manifests) directory
@@ -22,6 +23,7 @@ Sample application manifests (namespace, role binding, ...) are stored in the [m
 
 3. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
 
+---
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
 
 1. Install OpenShift Pipelines operator
@@ -45,6 +47,7 @@ spec:
 ```
 5. Optionally modify maven mirror settings in maven-settings configmap to point to your maven repo
 
+---
 If you want to use quay.io image registry to push images from the pipeline here are the steps to take:
 
 1. Create robot account in quay.io
@@ -91,6 +94,7 @@ type: Opaque
 
 3. When staring new pipeline select github-creds secret in git-basic-auth workspace 
 
+---
 If you want to test security pipelines following steps are required 
 
 1. Install Advanced Cluster Security for Kubernetes and configure it
@@ -116,6 +120,7 @@ oc create -f https://raw.githubusercontent.com/jstakun/openshift-cicd-demo/main/
 ```
 Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
 
+---
 If you want to play with image signing you must install locally cosign and run following command
 ```
 cosign generate-key-pair k8s://sample-app-cicd/signing-secrets
