@@ -15,17 +15,11 @@ Sample application onboarding
 
 Sample application manifests (namespace, role binding, ...) are stored in the [manifests](https://github.com/jstakun/openshift-gitops/tree/main/manifests) directory
 
-1. Create sample-app-admins group in OCP
+1. Synchronize apps-management application in ArgoCD UI/CLI
 
-2. Synchronize apps-management application in ArgoCD UI/CLI
+2. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
-3. oc create -f config/sample-appproject.yaml
-
-4. oc create -f config/sample-applicationset.yaml
-
-5. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
-
-6. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
+3. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
 
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
 
