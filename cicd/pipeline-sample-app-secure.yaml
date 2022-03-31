@@ -187,6 +187,9 @@ spec:
       taskRef:
         kind: Task
         name: cosign
+      workspaces:
+        - name: source
+          workspace: workspace
   workspaces:
     - name: workspace
     - name: maven-settings
