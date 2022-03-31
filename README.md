@@ -6,11 +6,12 @@ Initial setup
 2. Edit argocd-rbac-cm config map in openshift-gitops project and set policy.default: ''
 
 3. Create gitops-admins group in OCP
-
+```
 4. oc create -f config/app-management-appproject.yaml
-
+```
+```
 5. oc create -f config/app-management-application.yaml
-
+```
 Sample application onboarding
 
 Sample application manifests (namespace, role binding, ...) are stored in the [manifests](https://github.com/jstakun/openshift-gitops/tree/main/manifests) directory
@@ -119,8 +120,10 @@ If you want to play with image signing you must install locally cosign and run f
 ```
 cosign generate-key-pair k8s://sample-app-cicd/signing-secrets
 ```
-This command must be executed in context of your project where pipeline is executed so that signing secret can be stored there and accessed by pipeline task when it will be executed
+This command must be executed in context of your project where pipeline will be running so that signing secret can be stored there and accessed by pipeline task when it will be executed
 
-
-
-
+---
+Run secure pipeline
+```
+oc create -f config/pipelinerun-sample-app-pipeline.yaml
+```
