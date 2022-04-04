@@ -212,5 +212,4 @@ spec:
     - name: workspace
     - name: maven-settings
     - name: images-url
-      optional: true
     - name: git-basic-auth
