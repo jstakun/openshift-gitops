@@ -188,7 +188,7 @@ spec:
         kind: Task
         name: cosign
       workspaces:
-        - name: soue
+        - name: source
           workspace: workspace
     - name: dependency-analysis
       params:
