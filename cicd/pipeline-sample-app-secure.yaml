@@ -63,7 +63,7 @@ spec:
         - name: CONTEXT_DIR
           value: .
       runAfter:
-        - git-clone
+        - dependency-analysis
       taskRef:
         kind: ClusterTask
         name: maven
@@ -188,10 +188,29 @@ spec:
         kind: Task
         name: cosign
       workspaces:
-        - name: source
+        - name: soue
+          workspace: workspace
+    - name: dependency-analysis
+      params:
+        - name: manifest-file-path
+          value: pom.xml
+        - name: output-file-path
+          value: redhat-codeready-dependency-analysis-report.json
+        - name: pkg-installation-directory-path
+          value: /
+        - name: image
+          value: 'quay.io/jstakun/crda-openjdk:11'
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: Task
+        name: redhat-codeready-dependency-analysis
+      workspaces:
+        - name: output
           workspace: workspace
   workspaces:
     - name: workspace
     - name: maven-settings
     - name: images-url
+      optional: true
     - name: git-basic-auth

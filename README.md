@@ -131,6 +131,24 @@ cosign generate-key-pair k8s://sample-app-cicd/signing-secrets
 This command must be executed in context of your project where pipeline will be running so that signing secret can be stored there and accessed by pipeline task when it will be executed
 
 ---
+In order to execute dependency analysis
+
+1. Install CRDA CLI from [here](https://github.com/fabric8-analytics/cli-tools/releases).
+
+2. Run crda auth command, and it will assign user key, which can be found in ~/.crda/config.yaml.
+
+3. Create secret containing user key generated in previous step
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: crda
+type: Opaque
+stringData:
+  crda-key: {{CRDA_USER_KEY}}
+```
+
+---
 Run secure pipeline
 ```
 oc create -f config/pipelinerun-sample-app-pipeline.yaml
