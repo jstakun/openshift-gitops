@@ -19,7 +19,7 @@ spec:
     - default: quay.io/jstakun/hello-quarkus-dev
       name: APP_IMAGE
       type: string
-    - default: http://nexus.demo-cicd.svc:8081/repository/maven-public/
+    - default: 'http://nexus.sample-app-cicd.svc:8081/repository/maven-public/'
       name: MAVEN_MIRROR_URL
       type: string
   tasks:
@@ -41,7 +41,7 @@ spec:
           value: 'true'
         - name: gitInitImage
           value: >-
-            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:da1aedf0b17f2b9dd2a46edc93ff1c0582989414b902a28cd79bad8a035c9ea4
+            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:af7dd5b3b1598a980f17d5f5d3d8a4b11ab4f5184677f7f17ad302baa36bd3c1
         - name: userHome
           value: /tekton/home
       taskRef:
@@ -106,7 +106,10 @@ spec:
         - name: NEW_TAG
           value: $(params.APP_IMAGE_TAG)
       runAfter:
+        - rox-image-check
+        - rox-image-scan
         - sign-image
+        - deployment-check
       taskRef:
         kind: Task
         name: git-update-deployment
@@ -122,7 +125,7 @@ spec:
             image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(context.pipeline.name):$(params.APP_IMAGE_TAG)
         - name: BUILDER_IMAGE
           value: >-
-            registry.redhat.io/rhel8/buildah@sha256:99cae35f40c7ec050fed3765b2b27e0b8bbea2aa2da7c16408e2ca13c60ff8ee
+            registry.redhat.io/rhel8/buildah@sha256:e19cf23d5f1e0608f5a897f0a50448beb9f8387031cca49c7487ec71bd91c4d3
         - name: STORAGE_DRIVER
           value: vfs
         - name: DOCKERFILE
@@ -134,9 +137,7 @@ spec:
         - name: FORMAT
           value: oci
         - name: BUILD_EXTRA_ARGS
-          value: >-
-            --build-arg
-            MAVEN_MIRROR_URL=$(params.MAVEN_MIRROR_URL)
+          value: '--build-arg MAVEN_MIRROR_URL=$(params.MAVEN_MIRROR_URL)'
       runAfter:
         - unit-test
       taskRef:
@@ -173,23 +174,6 @@ spec:
       taskRef:
         kind: Task
         name: rox-image-scan
-    - name: sign-image
-      params:
-        - name: cosignkey
-          value: signing-secrets
-        - name: image
-          value: '$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
-        - name: namespace
-          value: $(context.pipelineRun.namespace)
-      runAfter:
-        - rox-image-check
-        - rox-image-scan
-      taskRef:
-        kind: Task
-        name: cosign
-      workspaces:
-        - name: source
-          workspace: workspace
     - name: dependency-analysis
       params:
         - name: manifest-file-path
@@ -207,6 +191,39 @@ spec:
         name: redhat-codeready-dependency-analysis
       workspaces:
         - name: output
+          workspace: workspace
+    - name: sign-image
+      params:
+        - name: cosignkey
+          value: signing-secrets
+        - name: image
+          value: '$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
+        - name: namespace
+          value: $(context.pipelineRun.namespace)
+      runAfter:
+        - skopeo-copy
+      taskRef:
+        kind: Task
+        name: cosign
+      workspaces:
+        - name: source
+          workspace: workspace
+    - name: deployment-check
+      params:
+        - name: rox_central_endpoint
+          value: roxsecrets
+        - name: rox_api_token
+          value: roxsecrets
+        - name: file-url
+          value: >-
+            https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/deployment.yaml
+      runAfter:
+        - skopeo-copy
+      taskRef:
+        kind: Task
+        name: rox-deployment-check-remote
+      workspaces:
+        - name: deployfiles
           workspace: workspace
   workspaces:
     - name: workspace
