@@ -114,7 +114,7 @@ stringData:
   rox_central_endpoint: central.stackrox.svc.cluster.local:443
 type: Opaque
 ```
-4. For image signing install locally [cosign](https://github.com/sigstore/cosign/releases) and run following command
+4. For image signing install [Cosign CLI](https://github.com/sigstore/cosign/releases) and run following command
 ```
 cosign generate-key-pair k8s://sample-app-cicd/signing-secrets
 ```
