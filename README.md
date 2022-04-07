@@ -98,7 +98,7 @@ type: Opaque
 ---
 If you want to test security pipelines following steps are required 
 
-1. Install Advanced Cluster Security for Kubernetes and configure it
+1. Install [Advanced Cluster Security for Kubernetes](https://docs.openshift.com/acs/3.69/installing/install-ocp-operator.html) and configure it
 
 2. Generate API token with Continuous Integration role
 
@@ -114,30 +114,20 @@ stringData:
   rox_central_endpoint: central.stackrox.svc.cluster.local:443
 type: Opaque
 ```
-
----
-If you want to deploy sample nexus repo you can use following deployment
-
-```
-oc create -f https://raw.githubusercontent.com/jstakun/openshift-cicd-demo/main/infra/nexus.yaml
-```
-Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
-
----
-If you want to play with image signing you must install locally cosign and run following command
+4. For image signing install locally [cosign](https://github.com/sigstore/cosign/releases) and run following command
 ```
 cosign generate-key-pair k8s://sample-app-cicd/signing-secrets
 ```
-This command must be executed in context of your project where pipeline will be running so that signing secret can be stored there and accessed by pipeline task when it will be executed
+This command must be executed in context of your project where pipeline will be running so that signing secret is stored there and accessed by pipeline task when it will be executed
 
----
-In order to execute dependency analysis
+5. In order to execute dependency analysis install [CRDA CLI](https://github.com/fabric8-analytics/cli-tools/releases).
 
-1. Install CRDA CLI from [here](https://github.com/fabric8-analytics/cli-tools/releases).
+6. Run following command to assign user key in ~/.crda/config.yaml.
+```
+crda auth
+```
 
-2. Run crda auth command, and it will assign user key, which can be found in ~/.crda/config.yaml.
-
-3. Create secret containing user key generated in previous step
+7. Create secret containing user key generated in previous step
 ```
 apiVersion: v1
 kind: Secret
@@ -147,6 +137,14 @@ type: Opaque
 stringData:
   crda-key: {{CRDA_USER_KEY}}
 ```
+
+---
+If you want to deploy sample nexus repo you can use following deployment
+
+```
+oc create -f https://raw.githubusercontent.com/jstakun/openshift-cicd-demo/main/infra/nexus.yaml
+```
+Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
 
 ---
 Run secure pipeline
