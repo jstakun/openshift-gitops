@@ -54,7 +54,7 @@ spec:
       params:
         - name: MAVEN_IMAGE
           value: >-
-            gcr.io/cloud-builders/mvn@sha256:57523fc43394d6d9d2414ee8d1c85ed7a13460cbb268c3cd16d28cfb3859e641
+            gcr.io/cloud-builders/mvn@sha256:3fc612a2994d33f41a7a147ce8e6991c9538bced903992efb4767f192083a774
         - name: GOALS
           value:
             - package
