@@ -24,6 +24,7 @@ Sample application manifests (namespace, role binding, ...) are stored in the [m
 ```
 oc create -f config/clusterrolebinding-gitops-monitoring-edit.yaml
 ```
+To make this work in OpenShift you must enable [User Workload Monitoring](https://docs.openshift.com/container-platform/4.10/monitoring/enabling-monitoring-for-user-defined-projects.html) 
 
 3. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
