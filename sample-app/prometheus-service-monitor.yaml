@@ -9,6 +9,7 @@ spec:
     - interval: 5s
       port: 8080-tcp
       scheme: http
+      path: /q/metrics
   selector:
     matchLabels:
      app: hello-quarkus
