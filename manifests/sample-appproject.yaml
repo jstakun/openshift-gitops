@@ -41,7 +41,9 @@ spec:
   - group: 'tekton.dev'
     kind: Task
   - group: 'tekton.dev'
-    kind: Pipeline 
+    kind: Pipeline
+  - group:  'monitoring.coreos.com'
+    kind: ServiceMonitor 
    
   orphanedResources:
     warn: false

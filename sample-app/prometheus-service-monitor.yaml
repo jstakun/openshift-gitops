@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: hello-quarkus-prometheus-monitor
+  name: hello-quarkus-prometheus-monitor
+spec:
+  endpoints:
+    - interval: 5s
+      port: 8080-tcp
+      scheme: http
+  selector:
+    matchLabels:
+     app: hello-quarkus
