@@ -155,5 +155,5 @@ Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
 ---
 Run secure pipeline
 ```
-oc create -f config/pipelinerun-sample-app-pipeline.yaml
+oc create -f config/pipelinerun-sample-app-secure.yaml
 ```
