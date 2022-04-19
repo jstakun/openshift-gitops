@@ -12,7 +12,6 @@ Initial setup
 oc create -f config/app-management-appproject.yaml
 oc create -f config/app-management-application.yaml
 ```
-5. In order to grant openshift-gitops service account permission to create service monitors in sample-app
 ---
 Sample application onboarding
 
