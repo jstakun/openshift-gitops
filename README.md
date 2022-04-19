@@ -25,9 +25,9 @@ oc create -f config/clusterrolebinding-gitops-monitoring-edit.yaml
 ```
 To make this work in OpenShift you must enable [User Workload Monitoring](https://docs.openshift.com/container-platform/4.10/monitoring/enabling-monitoring-for-user-defined-projects.html) 
 
-3. Sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
+3. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
 
-4. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
+4. Login to ArgoCD as sample-app-admins group member and sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
 ---
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
