@@ -3,3 +3,4 @@ resources:
 - service.yaml
 - secure-route.yaml
 - prometheus-service-monitor.yaml
+- network-policy.yaml

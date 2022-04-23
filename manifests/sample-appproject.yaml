@@ -44,7 +44,9 @@ spec:
     kind: Pipeline
   - group:  'monitoring.coreos.com'
     kind: ServiceMonitor 
-   
+  - group: 'networking.k8s.io'
+    kind: NetworkPolicy  
+ 
   orphanedResources:
     warn: false
 

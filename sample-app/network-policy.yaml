@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: baseline-hello-quarkus
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: openshift-user-workload-monitoring
+      podSelector:
+        matchLabels:
+          app: prometheus
+          app.kubernetes.io/instance: user-workload
+          app.kubernetes.io/managed-by: prometheus-operator
+          app.kubernetes.io/name: prometheus
+          prometheus: user-workload
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: openshift-ingress
+      podSelector:
+        matchLabels:
+          ingresscontroller.operator.openshift.io/deployment-ingresscontroller: default
+    ports:
+    - port: 8080
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      app: hello-quarkus
+  policyTypes:
+  - Ingress
