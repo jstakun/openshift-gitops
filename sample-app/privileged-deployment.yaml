@@ -38,11 +38,12 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      securityContext: 
-        privileged: true 
+      securityContext: {}
       schedulerName: default-scheduler
   strategy:
     type: RollingUpdate
