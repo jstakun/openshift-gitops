@@ -11,7 +11,7 @@ spec:
       name: image_url
       type: string
     - default: >-
-        https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/deployment.yaml
+        https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/privileged-deployment.yaml
       name: deployment_url
       type: string
   tasks:
