@@ -1,0 +1,9 @@
+kind: SecuredCluster
+apiVersion: platform.stackrox.io/v1alpha1
+metadata:
+  name: stackrox-secured-cluster-services
+  namespace: stackrox
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  clusterName: production-cluster
