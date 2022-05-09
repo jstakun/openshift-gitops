@@ -6,7 +6,6 @@ metadata:
   namespace: openshift-compliance
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-    argocd.argoproj.io/hook: PostSync
 profiles:
   - name: ocp4-cis-node
     kind: Profile
@@ -23,7 +22,6 @@ metadata:
   namespace: openshift-compliance
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-    argocd.argoproj.io/hook: PostSync
 profiles:
   - name: ocp4-cis
     kind: Profile
