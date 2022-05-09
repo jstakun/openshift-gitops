@@ -4,7 +4,7 @@ metadata:
   name: apps-infra
   namespace: openshift-gitops
 spec:
-  project: apps-infra
+  project: apps-management
 
   source:
     repoURL: https://github.com/jstakun/openshift-gitops.git

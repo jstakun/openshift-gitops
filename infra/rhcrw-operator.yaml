@@ -9,7 +9,7 @@ metadata:
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  generateName: openshift-workspaces-
+  name: openshift-workspaces
   namespace: openshift-workspaces
 spec:
   targetNamespaces:
