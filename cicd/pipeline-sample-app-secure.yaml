@@ -19,7 +19,7 @@ spec:
     - default: quay.io/jstakun/hello-quarkus-dev
       name: APP_IMAGE
       type: string
-    - default: 'http://nexus.sample-app-cicd.svc:8081/repository/maven-public/'
+    - default: 'http://nexus.apps-infra.svc:8081/repository/maven-public/'
       name: MAVEN_MIRROR_URL
       type: string
   tasks:
@@ -139,7 +139,7 @@ spec:
         - name: BUILD_EXTRA_ARGS
           value: '--build-arg MAVEN_MIRROR_URL=$(params.MAVEN_MIRROR_URL)'
       runAfter:
-        - unit-test
+        - sonarqube-scanner
       taskRef:
         kind: ClusterTask
         name: buildah
@@ -225,8 +225,20 @@ spec:
       workspaces:
         - name: deployfiles
           workspace: workspace
+    - name: sonarqube-scanner
+      runAfter:
+        - unit-test
+      taskRef:
+        kind: Task
+        name: sonarqube-scanner
+      workspaces:
+        - name: source
+          workspace: workspace
+        - name: sonar-settings
+          workspace: sonar-settings
   workspaces:
     - name: workspace
     - name: maven-settings
     - name: images-url
     - name: git-basic-auth
+    - name: sonar-settings
