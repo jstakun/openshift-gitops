@@ -144,7 +144,7 @@ stringData:
   crda-key: {{CRDA_USER_KEY}}
 ```
 ---
-If you want to integrate with sonar create following config map. Make sure to replace all SONAR_ and sonar.host.url with your settings
+If you want to integrate with Sonar create following config map. Make sure to replace all SONAR_ placeholders and sonar.host.url properties with your settings.
 ```
 kind: ConfigMap
 apiVersion: v1
