@@ -143,7 +143,22 @@ type: Opaque
 stringData:
   crda-key: {{CRDA_USER_KEY}}
 ```
-
+---
+If you want to integrate with sonar create following config map. Make sure to replace all SONAR_ and sonar.host.url with your settings
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sonar-properties
+data:
+  sonar-project.properties: |
+    sonar.organization=SONAR_ORG
+    sonar.login=SONAR_TOKEN
+    sonar.qualitygate.wait=false
+    sonar.host.url=https://sonarcloud.io
+    sonar.projectKey=SONAR_PROJECT_KEY
+    sonar.java.binaries=target
+```
 ---
 If you want to deploy sample nexus repo you can use following deployment
 
