@@ -216,7 +216,7 @@ spec:
           value: roxsecrets
         - name: file-url
           value: >-
-            https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/deployment.yaml
+            https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/privileged-deployment.yaml
       runAfter:
         - skopeo-copy
       taskRef:
