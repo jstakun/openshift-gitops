@@ -2,7 +2,7 @@
 ```
 helm upgrade myallure --set security.user=admin --set security.password=changeme --create-namespace --namespace=allure --install .
 ```
-2. In sample-app-cicd project create allure-auth secret
+2. Create allure-auth secret in sample-app-cicd project
 ```
 kind: Secret
 apiVersion: v1
@@ -13,9 +13,9 @@ stringData:
   username: admin
 type: Opaque
 ```
-3. Modify zap proxy task to connect to your allure instance and secret
+3. Modify zap proxy task to connect to your allure instance using created secret
 
-4. After task will finish successfully you report will be availabel here:
+4. After zap-proxy task will finish successfully your report will be available here:
 ```
 https://<ALLURE_HOST>/allure-docker-service/projects/zap-scan/reports/latest/index.html
 ```
