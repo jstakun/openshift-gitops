@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   labels:
     openshift.io/cluster-monitoring: "true"
-    argocd.argoproj.io/managed-by: openshift-gitops
+    argocd.argoproj.io/managed-by: "openshift-gitops"
   name: rhacs-operator
 ---
 apiVersion: operators.coreos.com/v1
@@ -16,7 +16,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   targetNamespaces:
-  - ''
+  - ""
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
