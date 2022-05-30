@@ -21,6 +21,7 @@ spec:
       default: allure-auth
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
+      default: /zap-proxy
   steps:
     - name: zap-proxy
       image: quay.io/rht-labs/zap2docker-stable:latest
