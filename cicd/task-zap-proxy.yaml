@@ -71,3 +71,6 @@ spec:
         ${ALLURE_PASSWORD} \
         $(params.ALLURE_HOST) \
         wrk/allure-results
+        echo "---------------------------"
+        echo "Open this link to see detailed report:"
+        echo $(params.ALLURE_HOST)/allure-docker-service/projects/zap-scan/reports/latest/index.html
