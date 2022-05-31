@@ -43,7 +43,7 @@ spec:
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       script: |
         #!/usr/bin/env bash
-        set -x
+        #set -x
         echo "Make the wrk directory available to save the reports"
         cd /zap
         mkdir -p /zap/wrk
@@ -64,6 +64,7 @@ spec:
         EOF
         export PATH=$HOME/.local/bin:$PATH
         pytest test.py --alluredir=/zap/wrk/allure-results
+        echo "Sending results to Allure"
         curl -sLo send_results.sh https://raw.githubusercontent.com/eformat/allure/main/scripts/send_results.sh && chmod 755 send_results.sh
         ./send_results.sh $(params.APPLICATION_NAME) \
         /zap \
