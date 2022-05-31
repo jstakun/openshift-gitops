@@ -26,6 +26,8 @@ spec:
           value: $(params.api_secret)
         - name: image
           value: $(params.image_url)
+      runAfter:
+        - zap-proxy
       taskRef:
         kind: Task
         name: rox-image-check
@@ -39,6 +41,8 @@ spec:
           value: $(params.image_url)
         - name: output_format
           value: table
+      runAfter:
+        - zap-proxy
       taskRef:
         kind: Task
         name: rox-image-scan
@@ -71,8 +75,6 @@ spec:
           value: allure-auth
         - name: WORK_DIRECTORY
           value: /zap-proxy
-      runAfter:
-        - rox-deployment-check-remote
       taskRef:
         kind: Task
         name: zap-proxy
