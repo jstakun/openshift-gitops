@@ -15,6 +15,8 @@ metadata:
     app.kubernetes.io/instance: nexus
     app.kubernetes.io/name: nexus
     app.kubernetes.io/part-of: nexus
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   name: nexus
   namespace: apps-infra
 spec:
@@ -78,6 +80,8 @@ kind: Service
 metadata:
   labels:
     app: nexus
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   name: nexus
   namespace: apps-infra 
 spec:
@@ -96,6 +100,8 @@ kind: Route
 metadata:
   labels:
     app: nexus
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   name: nexus
   namespace: apps-infra
 spec:
@@ -111,6 +117,8 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: nexus
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   name: nexus-pv
   namespace: apps-infra
 spec:

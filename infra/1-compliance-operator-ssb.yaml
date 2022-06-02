@@ -5,7 +5,7 @@ metadata:
   name: ocp4-cis-node
   namespace: openshift-compliance
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "3"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 profiles:
   - name: ocp4-cis-node
@@ -22,7 +22,7 @@ metadata:
   name: ocp4-cis
   namespace: openshift-compliance
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "3"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 profiles:
   - name: ocp4-cis

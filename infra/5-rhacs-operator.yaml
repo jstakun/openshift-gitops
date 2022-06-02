@@ -13,7 +13,7 @@ metadata:
   name: rhacs-operator
   namespace: rhacs-operator
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   targetNamespaces:
   - ""
@@ -23,6 +23,8 @@ kind: Subscription
 metadata:
   name: rhacs-operator
   namespace: rhacs-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   channel: latest
   installPlanApproval: Manual
