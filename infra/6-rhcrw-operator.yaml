@@ -6,17 +6,17 @@ metadata:
     openshift.io/cluster-monitoring: "true"
     argocd.argoproj.io/managed-by: openshift-gitops
   name: openshift-workspaces
----
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: openshift-workspaces
-  namespace: openshift-workspaces
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-spec:
-  targetNamespaces:
-    - openshift-workspaces
+#---
+#apiVersion: operators.coreos.com/v1
+#kind: OperatorGroup
+#metadata:
+#  name: openshift-workspaces
+#  namespace: openshift-workspaces
+#  annotations:
+#    argocd.argoproj.io/sync-wave: "2"
+#spec:
+#  targetNamespaces:
+#    - openshift-workspaces
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription

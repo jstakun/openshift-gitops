@@ -6,17 +6,17 @@ metadata:
     openshift.io/cluster-monitoring: "true"
     argocd.argoproj.io/managed-by: "openshift-gitops"
   name: rhacs-operator
----
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: rhacs-operator
-  namespace: rhacs-operator
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-spec:
-  targetNamespaces:
-  - ""
+#---
+#apiVersion: operators.coreos.com/v1
+#kind: OperatorGroup
+#metadata:
+#  name: rhacs-operator
+#  namespace: rhacs-operator
+#  annotations:
+#    argocd.argoproj.io/sync-wave: "2"
+#spec:
+#  targetNamespaces:
+#  - ""
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
