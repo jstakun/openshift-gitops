@@ -17,6 +17,9 @@ spec:
     - default: 'https://www.gms-world.net'
       name: app_url
       type: string
+    - default: 'http://myallure.allure.svc.cluster.local:5050'
+      name: allure_host
+      type: string
   tasks:
     - name: rox-image-check
       params:
@@ -70,7 +73,7 @@ spec:
         - name: APP_URL
           value: $(params.app_url)
         - name: ALLURE_HOST
-          value: 'http://myallure.allure.svc:5050'
+          value: $(params.allure_host)
         - name: ALLURE_SECRET
           value: allure-auth
         - name: WORK_DIRECTORY
