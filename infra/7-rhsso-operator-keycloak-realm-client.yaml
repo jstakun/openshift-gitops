@@ -1,0 +1,65 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: production-sso
+  namespace: rhsso
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  externalAccess:
+    enabled: true
+  instances: 1
+---
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: ocp
+  namespace: rhsso
+  labels:
+    app: sso
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  instanceSelector:
+    matchLabels:
+      app: sso
+  realm:
+    displayName: OpenShift Container Platform
+    enabled: true
+    id: ocp
+    realm: openshift
+---
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: ocp-web-console
+  namespace: rhsso
+  labels:
+    app: sso
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  client:
+    rootUrl: 'https://change.me'
+    enabled: true
+    clientAuthenticatorType: client-secret
+    redirectUris:
+      - /oauth2callback/rh-sso
+    clientId: ocp-web-console
+    implicitFlowEnabled: true
+    secret: client-secret
+    publicClient: false
+    standardFlowEnabled: false
+    directAccessGrantsEnabled: false
+    name: OpenShift Web Console
+  realmSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - sso
+    matchLabels:
+      app: sso
