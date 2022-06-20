@@ -14,7 +14,7 @@ spec:
         https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/privileged-deployment.yaml
       name: deployment_url
       type: string
-    - default: 'https://www.gms-world.net'
+    - default: 'http://hello-quarkus.sample-app-stage.svc.cluster.local'
       name: app_url
       type: string
     - default: 'http://myallure.allure.svc.cluster.local:5050'
