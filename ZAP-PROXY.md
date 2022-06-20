@@ -1,6 +1,6 @@
 1. Install Allure reports server as per https://github.com/eformat/allure
 ```
-helm upgrade myallure --set security.user=admin --set security.password=changeme --create-namespace --namespace=allure --install .
+helm upgrade myallure --set security.user=admin --set security.password=password --create-namespace --namespace=allure --install .
 ```
 2. Create allure-auth secret in sample-app-cicd project
 ```
@@ -9,7 +9,7 @@ apiVersion: v1
 metadata:
   name: allure-auth
 stringData:
-  password: changeme
+  password: password
   username: admin
 type: Opaque
 ```
