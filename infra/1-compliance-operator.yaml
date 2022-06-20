@@ -5,17 +5,17 @@ metadata:
   labels:
     openshift.io/cluster-monitoring: "true"
   name: openshift-compliance
-#---
-#apiVersion: operators.coreos.com/v1
-#kind: OperatorGroup
-#metadata:
-#  name: compliance-operator
-#  namespace: openshift-compliance
-#  annotations:
-#    argocd.argoproj.io/sync-wave: "2"
-#spec:
-#  targetNamespaces:
-#  - openshift-compliance
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: compliance-operator
+  namespace: openshift-compliance
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  targetNamespaces:
+  - openshift-compliance
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
