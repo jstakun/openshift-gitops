@@ -5,7 +5,7 @@ metadata:
 spec:
   to:
     kind: Service
-    name: hello-quarkus-http
+    name: hello-quarkus
     weight: 100
   port:
     targetPort: 8080
