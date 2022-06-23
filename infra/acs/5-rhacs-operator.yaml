@@ -16,7 +16,6 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   targetNamespaces:
-  - "rhacs-operator"
   - "stackrox"
 ---
 apiVersion: operators.coreos.com/v1alpha1
