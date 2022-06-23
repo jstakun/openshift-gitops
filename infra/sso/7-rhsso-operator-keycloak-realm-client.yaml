@@ -51,10 +51,10 @@ spec:
     redirectUris:
       - /oauth2callback/rh-sso
     clientId: ocp-web-console
-    implicitFlowEnabled: true
-    secret: client-secret
+    implicitFlowEnabled: false
+    secret: 5a77e831-bb79-43ca-9c58-082c9a09301f
     publicClient: false
-    standardFlowEnabled: false
+    standardFlowEnabled: true
     directAccessGrantsEnabled: false
     name: OpenShift Web Console
   realmSelector:
