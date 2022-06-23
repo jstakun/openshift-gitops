@@ -25,11 +25,11 @@ spec:
     metadata:
       name: 'app-infra-{{operator}}'
     spec:
-      project: app-infra
+      project: apps-management
       source:
         repoURL: https://github.com/jstakun/openshift-gitops.git
         targetRevision: HEAD
         path: 'infra/{{operator}}'
       destination:
         server: '{{url}}'
-        namespace: app-infra-{{operator}}
+        namespace: openshift-gitops
