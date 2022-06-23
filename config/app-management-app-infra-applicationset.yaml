@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: app-infra
+  namespace: openshift-gitops
+spec:
+  generators:
+  - list:
+      elements:
+      - operator: acs
+        url: https://kubernetes.default.svc
+      - operator: compliance
+        url: https://kubernetes.default.svc
+      - operator: crw
+        url: https://kubernetes.default.svc
+      - operator: nexus
+        url: https://kubernetes.default.svc
+      - operator: pipelines
+        url: https://kubernetes.default.svc
+      - operator: quay
+        url: https://kubernetes.default.svc
+      - operator: sso
+        url: https://kubernetes.default.svc
+  template:
+    metadata:
+      name: 'app-infra-{{operator}}'
+    spec:
+      project: app-infra
+      source:
+        repoURL: https://github.com/jstakun/openshift-gitops.git
+        targetRevision: HEAD
+        path: 'infra/{{operator}}'
+      destination:
+        server: '{{url}}'
+        namespace: app-infra-{{operator}}
