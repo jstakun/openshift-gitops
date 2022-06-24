@@ -11,39 +11,41 @@ spec:
     enable: true
   server:
     allowUserDefinedWorkspaceNamespaces: false
-    cheClusterRoles: ''
+    #cheClusterRoles: ''
     cheFlavor: codeready
-    cheWorkspaceClusterRole: ''
+    #cheWorkspaceClusterRole: ''
     gitSelfSignedCert: false
-    nonProxyHosts: ''
-    proxyPassword: ''
-    proxyPort: ''
-    proxyURL: ''
-    proxyUser: ''
-    serverExposureStrategy: ''
-    serverTrustStoreConfigMapName: ''
+    #nonProxyHosts: ''
+    #proxyPassword: ''
+    #proxyPort: ''
+    #proxyURL: ''
+    #proxyUser: ''
+    serverExposureStrategy: multi-host
+    #serverTrustStoreConfigMapName: ''
     tlsSupport: true
     workspaceNamespaceDefault: <username>-codeready
   auth:
     externalIdentityProvider: false
-    identityProviderAdminUserName: ''
+    #identityProviderAdminUserName: ''
     identityProviderClientId: ''
-    identityProviderPassword: ''
+    #identityProviderPassword: ''
     identityProviderRealm: ''
     identityProviderURL: ''
-    initialOpenShiftOAuthUser: false
-    oAuthClientName: ''
-    oAuthSecret: ''
+    #initialOpenShiftOAuthUser: false
+    #oAuthClientName: ''
+    #oAuthSecret: ''
+    openShiftoAuth: true
+    updateAdminPassword: false
   database:
     chePostgresDb: ''
     chePostgresHostName: ''
-    chePostgresPassword: ''
+    #chePostgresPassword: ''
     chePostgresPort: ''
-    chePostgresUser: ''
+    #chePostgresUser: ''
     externalDb: false
   storage:
-    postgresPVCStorageClassName: ''
+    #postgresPVCStorageClassName: ''
     preCreateSubPaths: true
     pvcClaimSize: 5Gi
     pvcStrategy: common
-    workspacePVCStorageClassName: ''
+    #workspacePVCStorageClassName: ''
