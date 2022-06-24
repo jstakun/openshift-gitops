@@ -11,41 +11,24 @@ spec:
     enable: true
   server:
     allowUserDefinedWorkspaceNamespaces: false
-    #cheClusterRoles: ''
     cheFlavor: codeready
-    #cheWorkspaceClusterRole: ''
     gitSelfSignedCert: false
-    #nonProxyHosts: ''
-    #proxyPassword: ''
-    #proxyPort: ''
-    #proxyURL: ''
-    #proxyUser: ''
     serverExposureStrategy: multi-host
-    #serverTrustStoreConfigMapName: ''
     tlsSupport: true
     workspaceNamespaceDefault: <username>-codeready
   auth:
     externalIdentityProvider: false
-    #identityProviderAdminUserName: ''
     identityProviderClientId: ''
-    #identityProviderPassword: ''
     identityProviderRealm: ''
     identityProviderURL: ''
-    #initialOpenShiftOAuthUser: false
-    #oAuthClientName: ''
-    #oAuthSecret: ''
     openShiftoAuth: true
     updateAdminPassword: false
   database:
     chePostgresDb: ''
     chePostgresHostName: ''
-    #chePostgresPassword: ''
     chePostgresPort: ''
-    #chePostgresUser: ''
     externalDb: false
   storage:
-    #postgresPVCStorageClassName: ''
     preCreateSubPaths: true
     pvcClaimSize: 5Gi
     pvcStrategy: common
-    #workspacePVCStorageClassName: ''
