@@ -31,6 +31,8 @@ kind: RoleBinding
 metadata:
   name: create-cluster-init
   namespace: stackrox
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -45,4 +47,6 @@ kind: ServiceAccount
 metadata:
   name: create-cluster-init
   namespace: stackrox
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 
