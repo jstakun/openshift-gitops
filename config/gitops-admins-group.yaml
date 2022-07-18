@@ -5,3 +5,4 @@ metadata:
 users:
   - kubeadmin
   - gitops-admin
+  - opentlc-mgr
