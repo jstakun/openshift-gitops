@@ -19,7 +19,7 @@ spec:
     - name: APP_IMAGE
       value: 'quay.io/jstakun/hello-quarkus-dev'
     - name: MAVEN_MIRROR_URL
-      value: 'http://nexus.sample-app-cicd.svc:8081/repository/maven-public/'
+      value: 'http://nexus.apps-infra.svc:8081/repository/maven-public/'
   pipelineRef:
     name: sample-app-secure
   serviceAccountName: pipeline
@@ -31,8 +31,12 @@ spec:
     - configMap:
         name: maven-settings
       name: maven-settings
+    - configMap:
+        name: sonar-properties 
+      name: sonar-settings
     - emptyDir: {}
       name: images-url
     - name: git-basic-auth
       secret:
-        secretName: github-creds
+         secretName: github-creds
+    

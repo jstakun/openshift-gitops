@@ -239,6 +239,6 @@ spec:
   workspaces:
     - name: workspace
     - name: maven-settings
-    - name: images-url
-    - name: git-basic-auth
     - name: sonar-settings
+    - name: git-basic-auth
+    - name: images-url
