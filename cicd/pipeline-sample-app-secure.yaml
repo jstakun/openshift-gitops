@@ -63,7 +63,7 @@ spec:
         - name: CONTEXT_DIR
           value: .
       runAfter:
-        - dependency-analysis
+        - sca-dependency-analysis
       taskRef:
         kind: ClusterTask
         name: maven
@@ -139,7 +139,7 @@ spec:
         - name: BUILD_EXTRA_ARGS
           value: '--build-arg MAVEN_MIRROR_URL=$(params.MAVEN_MIRROR_URL)'
       runAfter:
-        - sonarqube-scanner
+        - sast-sonarqube-scanner
       taskRef:
         kind: ClusterTask
         name: buildah
@@ -174,7 +174,7 @@ spec:
       taskRef:
         kind: Task
         name: rox-image-scan
-    - name: dependency-analysis
+    - name: sca-dependency-analysis
       params:
         - name: manifest-file-path
           value: pom.xml
@@ -225,7 +225,7 @@ spec:
       workspaces:
         - name: deployfiles
           workspace: workspace
-    - name: sonarqube-scanner
+    - name: sast-sonarqube-scanner
       runAfter:
         - unit-test
       taskRef:
