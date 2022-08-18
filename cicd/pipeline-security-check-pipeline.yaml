@@ -30,7 +30,7 @@ spec:
         - name: image
           value: $(params.image_url)
       runAfter:
-        - zap-proxy
+        - dast-zap-proxy
       taskRef:
         kind: Task
         name: rox-image-check

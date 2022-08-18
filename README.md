@@ -4,9 +4,13 @@ Initial setup
 1. Install OpenShift Gitops 1.3.1+ operator
 
 2. Edit argocd-rbac-cm config map in openshift-gitops project and set policy.default: ''
-
+```
+oc edit cm argocd-rbac-cm -n openshift-gitops
+```
 3. Create gitops-admins group in OCP
-
+```
+oc create -f config/gitops-admins-group.yaml
+```
 4. Setup app managment ArgoCD application 
 ```
 oc create -f config/app-management-appproject.yaml
