@@ -17,7 +17,8 @@ data:
         <mirror>
           <id>nexus</id>
           <name>nexus</name>
-          <url>https://repo1.maven.org/maven2/</url>
+          <url>http://nexus.apps-infra.svc:8081/repository/maven-public/</url>
+          <!--url>https://repo1.maven.org/maven2/</url-->
           <mirrorOf>*</mirrorOf>
         </mirror>
       </mirrors>

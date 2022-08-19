@@ -49,7 +49,7 @@ spec:
         cd /zap
         mkdir -p /zap/wrk
         echo "🪰🪰🪰 Starting the pen test..."
-        /zap/zap-baseline.py -t $(params.APP_URL) -r $PIPELINERUN_NAME.html
+        /zap/zap-baseline.py -t $(params.APP_URL) -r $PIPELINERUN_NAME.html -a
         ls -lart /zap/wrk
         echo "🛸🛸🛸 Saving results..."
         # FIXME for now this works, move to script+image
