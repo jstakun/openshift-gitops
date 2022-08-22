@@ -8,3 +8,6 @@ metadata:
     argocd.argoproj.io/sync-options: "SkipDryRunOnMissingResource=true"
 spec:
   clusterName: production-cluster
+  perNode:
+    collector:
+      collection: KernelModule
