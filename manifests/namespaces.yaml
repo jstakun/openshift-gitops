@@ -33,3 +33,12 @@ metadata:
     argocd.argoproj.io/sync: "true"
   labels:
     argocd.argoproj.io/managed-by: openshift-gitops
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps-infra
+  annotations:
+    argocd.argoproj.io/sync: "true"
+  labels:
+    argocd.argoproj.io/managed-by: openshift-gitops
