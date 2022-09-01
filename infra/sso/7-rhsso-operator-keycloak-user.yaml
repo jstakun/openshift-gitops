@@ -1,0 +1,21 @@
+kind: KeycloakUser
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: user1-realm-user
+  labels:
+    app: sso
+  namespace: rhsso
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  user:
+    username: user1
+    firstName: John
+    lastName: Doe
+    email: user1@example.com
+    enabled: true
+    emailVerified: false
+  realmSelector:
+    matchLabels:
+      app: sso
