@@ -41,7 +41,7 @@ spec:
           securityContext:
             privileged: true
             capabilities:
-              add: ["NET_ADMIN", "SYS_TIME"]
+              add: ["CAP_NET_ADMIN", "SYS_TIME"]
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
