@@ -28,6 +28,8 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+            - containerPort: 22
+              protocol: TCP
           resources:
             limits:
               cpu: 200m
