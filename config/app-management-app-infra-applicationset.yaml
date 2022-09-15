@@ -11,7 +11,7 @@ spec:
         url: https://kubernetes.default.svc
       - operator: compliance
         url: https://kubernetes.default.svc
-      - operator: crw
+      - operator: ods
         url: https://kubernetes.default.svc
       - operator: nexus
         url: https://kubernetes.default.svc
