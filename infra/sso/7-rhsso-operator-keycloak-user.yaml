@@ -15,7 +15,6 @@ spec:
     lastName: Doe
     email: user1@example.com
     enabled: true
-    emailVerified: false
   realmSelector:
     matchLabels:
       app: sso

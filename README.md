@@ -46,7 +46,7 @@ If you want to play with Tekton CI pipeline which has been installed in sample-a
 ```
 spec:
   steps:
-    name: build
+    name: build-and-push
       resources: 
         requests:
           memory: 4Gi

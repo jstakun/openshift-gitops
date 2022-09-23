@@ -1,8 +1,22 @@
 
 ```
 oc get installplan -A
-oc patch installplan install-8lvrn --namespace openshift-compliance --type merge --patch '{"spec":{"approved":true}}'
-oc patch installplan install-l2htz --namespace openshift-operators --type merge --patch '{"spec":{"approved":true}}'
-oc patch installplan install-9qw8q --namespace openshift-workspaces --type merge --patch '{"spec":{"approved":true}}'
-oc patch installplan install-xtlgj --namespace rhacs-operator --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep compliance-operator | awk '{print $2}')
+oc patch installplan $PLAN --namespace openshift-compliance --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep openshift-pipelines-operator | awk '{print $2}')
+oc patch installplan $PLAN --namespace openshift-operators --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep container-security | awk '{print $2}')
+oc patch installplan $PLAN --namespace openshift-operators --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep devspacesoperator |  awk '{print $2}')
+oc patch installplan $PLAN --namespace openshift-operators --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep rhacs-operator | awk '{print $2}')
+oc patch installplan $PLAN --namespace rhacs-operator --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep rhsso-operator | awk '{print $2}')
+oc patch installplan $PLAN --namespace rhsso --type merge --patch '{"spec":{"approved":true}}'
 ```
