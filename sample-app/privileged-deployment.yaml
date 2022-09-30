@@ -43,7 +43,7 @@ spec:
           securityContext:
             privileged: true
             capabilities:
-              add: ["NET_ADMIN", "NET_RAW"]
+              add: ["SYS_ADMIN", "NET_ADMIN", "NET_RAW"]
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
