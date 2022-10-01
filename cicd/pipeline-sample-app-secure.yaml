@@ -72,7 +72,7 @@ spec:
           workspace: workspace
         - name: maven-settings
           workspace: maven-settings
-    - name: skopeo-copy
+    - name: copy-image
       params:
         - name: srcImageURL
           value: >-
@@ -106,10 +106,10 @@ spec:
         - name: NEW_TAG
           value: $(params.APP_IMAGE_TAG)
       runAfter:
-        - rox-image-check
-        - rox-image-scan
+        - acs-image-check
+        - acs-image-scan
         - sign-image
-        - deployment-check
+        - acs-deployment-check
       taskRef:
         kind: Task
         name: git-update-deployment
@@ -146,7 +146,7 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
-    - name: rox-image-check
+    - name: acs-mage-check
       params:
         - name: rox_central_endpoint
           value: roxsecrets
@@ -155,11 +155,11 @@ spec:
         - name: image
           value: '$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
       runAfter:
-        - skopeo-copy
+        - copy-image
       taskRef:
         kind: Task
         name: rox-image-check
-    - name: rox-image-scan
+    - name: acs-image-scan
       params:
         - name: rox_central_endpoint
           value: roxsecrets
@@ -170,7 +170,7 @@ spec:
         - name: output_format
           value: table
       runAfter:
-        - skopeo-copy
+        - copy-image
       taskRef:
         kind: Task
         name: rox-image-scan
@@ -201,14 +201,14 @@ spec:
         - name: namespace
           value: $(context.pipelineRun.namespace)
       runAfter:
-        - skopeo-copy
+        - copy-image
       taskRef:
         kind: Task
         name: cosign
       workspaces:
         - name: source
           workspace: workspace
-    - name: deployment-check
+    - name: acs-deployment-check
       params:
         - name: rox_central_endpoint
           value: roxsecrets
@@ -218,7 +218,7 @@ spec:
           value: >-
             https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/privileged-deployment.yaml
       runAfter:
-        - skopeo-copy
+        - copy-image
       taskRef:
         kind: Task
         name: rox-deployment-check-remote

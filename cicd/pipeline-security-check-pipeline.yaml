@@ -21,7 +21,7 @@ spec:
       name: allure_host
       type: string
   tasks:
-    - name: rox-image-check
+    - name: acs-image-check
       params:
         - name: rox_central_endpoint
           value: $(params.api_secret)
@@ -34,7 +34,7 @@ spec:
       taskRef:
         kind: Task
         name: rox-image-check
-    - name: rox-image-scan
+    - name: acs-image-scan
       params:
         - name: rox_central_endpoint
           value: $(params.api_secret)
@@ -49,7 +49,7 @@ spec:
       taskRef:
         kind: Task
         name: rox-image-scan
-    - name: rox-deployment-check-remote
+    - name: acs-deployment-check
       params:
         - name: rox_central_endpoint
           value: $(params.api_secret)
@@ -58,8 +58,8 @@ spec:
         - name: file-url
           value: $(params.deployment_url)
       runAfter:
-        - rox-image-check
-        - rox-image-scan
+        - acs-image-check
+        - acs-image-scan
       taskRef:
         kind: Task
         name: rox-deployment-check-remote
