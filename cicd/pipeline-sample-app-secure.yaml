@@ -146,7 +146,7 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
-    - name: acs-mage-check
+    - name: acs-image-check
       params:
         - name: rox_central_endpoint
           value: roxsecrets
