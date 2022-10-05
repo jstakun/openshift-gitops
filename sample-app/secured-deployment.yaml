@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: hello-quarkus
-          image: quay.io/jstakun/hello-quarkus-dev:latest
+          image: quay.io/jstakun/hello-quarkus-dev:0.1
           ports:
             - containerPort: 8080
               protocol: TCP
