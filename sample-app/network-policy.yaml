@@ -21,6 +21,12 @@ spec:
       podSelector:
         matchLabels:
           ingresscontroller.operator.openshift.io/deployment-ingresscontroller: default
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: sample-app-cicd
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: sample-app-cicd  
     ports:
     - port: 8080
       protocol: TCP
