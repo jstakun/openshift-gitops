@@ -57,6 +57,9 @@ spec:
     standardFlowEnabled: true
     directAccessGrantsEnabled: false
     name: OpenShift Web Console
+    defaultClientScopes:
+      - email
+      - profile
   realmSelector:
     matchExpressions:
       - key: app
