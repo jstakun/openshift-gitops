@@ -21,6 +21,8 @@ spec:
         url: https://kubernetes.default.svc
       - operator: sso
         url: https://kubernetes.default.svc
+      - operator: logging
+        url: https://kubernetes.default.svc  
   template:
     metadata:
       name: 'app-infra-{{operator}}'
