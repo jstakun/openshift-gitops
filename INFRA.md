@@ -19,4 +19,10 @@ oc patch installplan $PLAN --namespace rhacs-operator --type merge --patch '{"sp
 
 PLAN=$(oc get installplan -A | grep rhsso-operator | awk '{print $2}')
 oc patch installplan $PLAN --namespace rhsso --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep logging | awk '{print $2}')
+oc patch installplan $PLAN --namespace openshfit-logging --type merge --patch '{"spec":{"approved":true}}'
+
+PLAN=$(oc get installplan -A | grep loki | awk '{print $2}')
+oc patch installplan $PLAN --namespace openshift-operators-redhat --type merge --patch '{"spec":{"approved":true}}'
 ```
