@@ -10,9 +10,7 @@ spec:
           kubernetes.io/metadata.name: openshift-user-workload-monitoring
       podSelector:
         matchLabels:
-          app: prometheus
           app.kubernetes.io/instance: user-workload
-          app.kubernetes.io/managed-by: prometheus-operator
           app.kubernetes.io/name: prometheus
           prometheus: user-workload
     - namespaceSelector:
