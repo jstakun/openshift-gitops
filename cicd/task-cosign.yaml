@@ -1,11 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  annotations:
-    tekton.dev/pipelines.minVersion: 0.12.1
   name: cosign
-  labels:
-    app.kubernetes.io/version: 0.1.0
 spec:
   description: >-
     These tasks make it possible to use cosign within your Tekton pipelines
@@ -24,7 +20,7 @@ spec:
     - env:
         - name: COSIGN_EXPERIMENTAL
           value: '1'
-      image: 'gcr.io/projectsigstore/cosign:v1.5.1'
+      image: 'gcr.io/projectsigstore/cosign:v1.13.1'
       name: cosign
       resources: {}
       script: >

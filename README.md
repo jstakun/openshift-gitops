@@ -15,6 +15,7 @@ oc create -f config/gitops-admins-group.yaml
 ```
 oc create -f config/app-management-appproject.yaml
 oc create -f config/app-management-application.yaml
+oc create -f config/app-management-app-infra-applicationset.yaml
 ```
 ---
 Sample application onboarding
@@ -23,15 +24,17 @@ Sample application manifests (namespace, role binding, ...) are stored in the [m
 
 1. Synchronize apps-management application in ArgoCD UI/CLI
 
-2. Grant openshift-gitops service account permission to create service monitors in sample-app projects
+2. Configure OpenShift [User Workload Monitoring](https://docs.openshift.com/container-platform/latest/monitoring/enabling-monitoring-for-user-defined-projects.html)
+```
+oc create -f config/configmap-cluster-monitoring-config.yaml
+```
+3. Grant openshift-gitops service account permission to create service monitors in sample-app projects
 ```
 oc create -f config/clusterrolebinding-gitops-monitoring-edit.yaml
 ```
-To make this work in OpenShift you must enable [User Workload Monitoring](https://docs.openshift.com/container-platform/4.10/monitoring/enabling-monitoring-for-user-defined-projects.html) 
+4. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
 
-3. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
-
-4. Login to ArgoCD as sample-app-admins group member and sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
+5. Login to ArgoCD as sample-app-admins group member and sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
 ---
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
