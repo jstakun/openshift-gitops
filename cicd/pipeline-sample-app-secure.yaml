@@ -197,7 +197,7 @@ spec:
         - name: cosignkey
           value: signing-secrets
         - name: image
-          value: '$(params.APP_IMAGE):$(params.APP_IMAGE_TAG)'
+          value: '$(params.APP_IMAGE)@$(tasks.build-image.results.IMAGE_DIGEST)'
         - name: namespace
           value: $(context.pipelineRun.namespace)
       runAfter:
