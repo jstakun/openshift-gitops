@@ -31,7 +31,7 @@ spec:
             secretKeyRef:
               key: rox_central_endpoint
               name: $(params.rox_central_endpoint)
-      image: ubi7/ubi
+      image: redhat/ubi8
       name: rox-image-scan
       resources: {}
       script: >-
