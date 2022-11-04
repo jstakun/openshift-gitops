@@ -30,7 +30,7 @@ spec:
             secretKeyRef:
               key: rox_central_endpoint
               name: $(params.rox_central_endpoint)
-      image: centos
+      image: ubi7/ubi
       name: rox-deployment-check
       resources: {}
       script: >-
