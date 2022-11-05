@@ -7,7 +7,6 @@ configMapGenerator:
 - name: env-properties
   namespace: rhsso
   envs: [environment.properties]
-  behavior: merge
 
 vars:
 - name: OAUTH_HOST
