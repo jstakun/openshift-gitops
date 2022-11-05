@@ -45,7 +45,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   client:
-    rootUrl: 'https://oauth-openshift.apps.domain.com'
+    rootUrl: 'https://oauth-openshift.$(DOMAIN_NAME)'
     enabled: true
     clientAuthenticatorType: client-secret
     redirectUris:

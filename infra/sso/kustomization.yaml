@@ -1,0 +1,13 @@
+resources:
+- 7-rhsso-operator-keycloak-realm-client.yaml  
+- 7-rhsso-operator.yaml
+- 7-rhsso-operator-keycloak-user.yaml 
+
+configMapGenerator:
+- name: env-properties
+  envs: [environment.properties]
+
+vars:
+- name: SERVICES_GLOBAL_STATIC_IP_NAME
+  objref: { kind: ConfigMap, name: env-properties, apiVersion: v1 }
+  fieldref: { fieldpath: data.DOMAIN_NAME }
