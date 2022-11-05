@@ -3,6 +3,9 @@ resources:
 - 7-rhsso-operator.yaml
 - 7-rhsso-operator-keycloak-user.yaml 
 
+configurations:
+  - env-var-transformer.yaml
+
 configMapGenerator:
 - name: env-properties
   namespace: rhsso
