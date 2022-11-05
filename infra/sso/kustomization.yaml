@@ -8,6 +8,6 @@ configMapGenerator:
   envs: [environment.properties]
 
 vars:
-- name: SERVICES_GLOBAL_STATIC_IP_NAME
+- name: DOMAIN_NAME
   objref: { kind: ConfigMap, name: env-properties, apiVersion: v1 }
   fieldref: { fieldpath: data.DOMAIN_NAME }
