@@ -2,9 +2,9 @@ bases:
   - ../sample-app/
 commonLabels:
   app: hello-quarkus
-commonAnnotations: 
-  foo: bar
-nameSuffix: "-prod"
+#commonAnnotations: 
+#  foo: bar
+#nameSuffix: "-prod"
 #namePrefix:
 #patchesStrategicMerge:
 #- route_host.yaml
