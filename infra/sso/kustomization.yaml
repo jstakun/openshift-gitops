@@ -2,6 +2,7 @@ resources:
 - 7-rhsso-operator-keycloak-realm-client.yaml  
 - 7-rhsso-operator.yaml
 - 7-rhsso-operator-keycloak-user.yaml 
+- configmap.yaml
 
 configMapGenerator:
 - name: env-properties
