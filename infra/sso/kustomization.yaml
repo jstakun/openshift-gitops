@@ -10,5 +10,9 @@ configMapGenerator:
 
 vars:
 - name: OAUTH_HOST
-  objref: { kind: ConfigMap, name: env-properties, apiVersion: v1 }
-  fieldref: { fieldpath: data.OAUTH_HOST }
+  objref: 
+    kind: ConfigMap 
+    name: env-properties 
+    apiVersion: v1 
+  fieldref: 
+    fieldpath: data.OAUTH_HOST 
