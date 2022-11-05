@@ -6,6 +6,7 @@ resources:
 configMapGenerator:
 - name: env-properties
   envs: [environment.properties]
+  behavior: merge
 
 vars:
 - name: OAUTH_HOST

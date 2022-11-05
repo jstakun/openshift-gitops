@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: rhsso
+  name: env-properties
+data:
