@@ -1,5 +1,19 @@
 resources:
-- *.yaml
+- configmap-maven-settings.yaml         
+- pipeline-security-check-pipeline.yaml           
+- task-rox-image-check.yaml
+- task-cosign.yaml                                
+- task-rox-image-scan.yaml
+- task-git-update-deployment.yaml                 
+- task-sonarqube-scanner.yaml
+- persistentvolumeclaim-workspace.yaml  
+- task-redhat-codeready-dependency-analysis.yaml  
+- task-zap-proxy.yaml
+- pipeline-sample-app-secure.yaml       
+- task-rox-deployment-check-remote.yaml
+- pipeline-sample-app.yaml              
+- task-rox-deployment-check.yaml
+
 secretGenerator:
 - name: roxsecrets
   envs:
