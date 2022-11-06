@@ -10,6 +10,7 @@ spec:
 
   sourceRepos:
   - 'https://github.com/jstakun/openshift-gitops.git'
+  - 'https://bitnami-labs.github.io/sealed-secrets'
   
   destinations:
   - namespace: '*'
