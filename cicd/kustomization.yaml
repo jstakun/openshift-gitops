@@ -21,3 +21,6 @@ secretGenerator:
   options:
     disableNameSuffixHash: true
 
+patchesStrategicMerge:
+- pipeline-sa-patch.yaml
+
