@@ -18,3 +18,6 @@ secretGenerator:
 - name: roxsecrets
   envs:
   - environment.properties
+  options:
+    disableNameSuffixHash: true
+
