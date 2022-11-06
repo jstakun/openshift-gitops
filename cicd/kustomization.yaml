@@ -21,6 +21,13 @@ secretGenerator:
   options:
     disableNameSuffixHash: true
 
-patchesStrategicMerge:
-- pipeline-sa-patch.yaml
 
+patchesJSON6902:
+- target:
+    version: v1
+    kind: ServiceAccount
+    name: pipeline
+  patch: |-
+    - op: add
+      path: /secrets/name/-
+      value: quay-creds
