@@ -16,6 +16,8 @@ oc create -f config/gitops-admins-group.yaml
 oc create -f config/app-management-appproject.yaml
 oc create -f config/app-management-application.yaml
 oc create -f config/app-management-app-infra-applicationset.yaml
+oc create -f config/sealed-secrets-application.yaml
+oc create -f config/allure-application.yaml
 ```
 ---
 Sample application onboarding
