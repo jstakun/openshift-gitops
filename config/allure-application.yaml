@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: allure
+  namespace: openshift-gitops
+spec:
+  project: apps-management
+  source:
+    repoURL: https://github.com/eformat/allure.git
+    path: chart
+    targetRevision: main
+    helm:
+      releaseName: myallure
+      parameters:
+      - name: security.user
+        value: admin
+      - name: security.password
+        value: password
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: allure
+  syncPolicy:
+    syncOptions:     
+    - CreateNamespace=true 
+
