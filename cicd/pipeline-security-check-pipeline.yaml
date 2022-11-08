@@ -1,7 +1,7 @@
 ﻿apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: security-check-pipeline
+  name: security-check
 spec:
   params:
     - default: roxsecrets
