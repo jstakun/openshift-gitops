@@ -1,4 +1,4 @@
-nd: ServiceAccount
+kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: pipeline
