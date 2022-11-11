@@ -23,22 +23,22 @@ secretGenerator:
     disableNameSuffixHash: true
 
 
-patchesJSON6902:
-- target:
-    version: v1
-    kind: ServiceAccount
-    name: pipeline
-  patch: |-
-    - op: add
-      path: /secrets/name/-
-      value: quay-creds
-- target:
-    version: v1
-    kind: ServiceAccount
-    name: test
-  patch: |-
-    - op: add
-      path: /secrets/name/-
-      value: quay-creds
+#patchesJSON6902:
+#- target:
+#    version: v1
+#    kind: ServiceAccount
+#    name: pipeline
+#  patch: |-
+#    - op: add
+#      path: /secrets/name/-
+#      value: quay-creds
+#- target:
+#    version: v1
+#    kind: ServiceAccount
+#    name: test
+#  patch: |-
+#    - op: add
+#      path: /secrets/name/-
+#      value: quay-creds
 
 

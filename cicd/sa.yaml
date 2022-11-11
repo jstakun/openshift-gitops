@@ -3,4 +3,4 @@ kind: ServiceAccount
 metadata:
   name: test
 secrets:
-  name: test
+  name: quay-creds
