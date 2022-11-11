@@ -18,6 +18,7 @@ oc create -f config/app-management-application.yaml
 oc create -f config/app-management-app-infra-applicationset.yaml
 oc create -f config/sealed-secrets-application.yaml
 oc create -f config/allure-application.yaml
+oc create -f config/clusterrolebinding-crd-admin.yaml
 ```
 ---
 Sample application onboarding
