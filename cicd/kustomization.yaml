@@ -31,3 +31,13 @@ patchesJSON6902:
     - op: add
       path: /secrets/name/-
       value: quay-creds
+- target:
+    version: v1
+    kind: ServiceAccount
+    name: test
+  patch: |-
+    - op: add
+      path: /secrets/name/-
+      value: quay-creds
+
+

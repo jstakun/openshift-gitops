@@ -11,7 +11,7 @@ oc patch installplan $PLAN --namespace openshift-operators --type merge --patch 
 PLAN=$(oc get installplan -A | grep container-security | awk '{print $2}')
 oc patch installplan $PLAN --namespace openshift-operators --type merge --patch '{"spec":{"approved":true}}'
 
-PLAN=$(oc get installplan -A | grep devworkspace |  awk '{print $2}')
+PLAN=$(oc get installplan -A | grep devspace |  awk '{print $2}')
 oc patch installplan $PLAN --namespace openshift-operators --type merge --patch '{"spec":{"approved":true}}'
 
 PLAN=$(oc get installplan -A | grep rhacs-operator | awk '{print $2}')
