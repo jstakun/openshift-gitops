@@ -38,6 +38,8 @@ spec:
     kind: PersistentVolumeClaim
   - group: ''
     kind: Secret
+  - group: ''
+    kind: ServiceAccount
   - group: 'tekton.dev'
     kind: Task
   - group: 'tekton.dev'

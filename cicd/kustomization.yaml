@@ -13,7 +13,6 @@ resources:
 - task-rox-deployment-check-remote.yaml
 - pipeline-sample-app.yaml              
 - task-rox-deployment-check.yaml
-- sa.yaml
 
 secretGenerator:
 - name: roxsecrets
@@ -22,8 +21,7 @@ secretGenerator:
   options:
     disableNameSuffixHash: true
 
-
-#patchesJSON6902:
+patchesJSON6902:
 #- target:
 #    version: v1
 #    kind: ServiceAccount
@@ -32,13 +30,11 @@ secretGenerator:
 #    - op: add
 #      path: /secrets/name/-
 #      value: quay-creds
-#- target:
-#    version: v1
-#    kind: ServiceAccount
-#    name: test
-#  patch: |-
-#    - op: add
-#      path: /secrets/name/-
-#      value: quay-creds
-
-
+- target:
+    version: v1
+    kind: ServiceAccount
+    name: test
+  patch: |-
+    - op: add
+      path: /secrets/name/-
+      value: quay-creds
