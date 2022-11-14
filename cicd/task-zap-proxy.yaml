@@ -75,4 +75,4 @@ spec:
         wrk/allure-results
         echo "---------------------------"
         echo "Open this link to see detailed report:"
-        echo $(params.ALLURE_HOST)/allure-docker-service/projects/zap-scan/reports/latest/index.html
+        echo $(params.ALLURE_HOST)/allure-docker-service/projects/$(params.APPLICATION_NAME)/reports/latest/index.html
