@@ -4,3 +4,6 @@ resources:
 - secure-route.yaml
 - prometheus-service-monitor.yaml
 - network-policy.yaml
+- rolebinding-view.yaml
+- rolebinding-admin.yaml 
+- sample-app-admins-group.yaml 
