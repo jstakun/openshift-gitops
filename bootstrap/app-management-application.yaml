@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/jstakun/openshift-gitops.git
     targetRevision: HEAD
-    path: manifests
+    path: apps/bootstrap
 
   destination:
     server: https://kubernetes.default.svc
