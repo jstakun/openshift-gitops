@@ -1,5 +1,5 @@
 bases:
-  - ../sample-app/
+  - ../base/
 commonLabels:
   app: hello-quarkus
 #commonAnnotations: 

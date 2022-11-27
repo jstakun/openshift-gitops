@@ -9,31 +9,30 @@ oc edit cm argocd-rbac-cm -n openshift-gitops
 ```
 3. Create gitops-admins group in OCP
 ```
-oc create -f config/gitops-admins-group.yaml
+oc create -f bootstrap/gitops-admins-group.yaml
 ```
-4. Setup app managment ArgoCD application 
+4. Setup app managment ArgoCD applications 
 ```
-oc create -f config/app-management-appproject.yaml
-oc create -f config/app-management-application.yaml
-oc create -f config/app-management-app-infra-applicationset.yaml
-oc create -f config/sealed-secrets-application.yaml
-oc create -f config/allure-application.yaml
-oc create -f config/clusterrolebinding-crd-admin.yaml
+oc create -f bootstrap/app-management-appproject.yaml
+oc create -f bootstrap/app-management-application.yaml
+oc create -f bootstrap/app-management-app-infra-applicationset.yaml
+oc create -f bootstrap/sealed-secrets-application.yaml
+oc create -f bootstrap/allure-application.yaml
 ```
 ---
 Sample application onboarding
 
-Sample application manifests (namespace, role binding, ...) are stored in the [manifests](https://github.com/jstakun/openshift-gitops/tree/main/manifests) directory
+Sample application manifests (namespace, role binding, ...) are stored in the [apps/bootstrap](https://github.com/jstakun/openshift-gitops/tree/main/apps/bootstrap) directory
 
 1. Synchronize apps-management application in ArgoCD UI/CLI
 
 2. Configure OpenShift [User Workload Monitoring](https://docs.openshift.com/container-platform/latest/monitoring/enabling-monitoring-for-user-defined-projects.html)
 ```
-oc create -f config/configmap-cluster-monitoring-config.yaml
+oc create -f cluster-config/commons/configmap-cluster-monitoring-config.yaml
 ```
 3. Grant openshift-gitops service account permission to create service monitors in sample-app projects
 ```
-oc create -f config/clusterrolebinding-gitops-monitoring-edit.yaml
+oc create -f cluster-config/commons/clusterrolebinding-gitops-monitoring-edit.yaml
 ```
 4. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
 
@@ -179,6 +178,3 @@ Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
 
 ---
 Run secure pipeline
-```
-oc create -f config/pipelinerun-sample-app-secure.yaml
-```

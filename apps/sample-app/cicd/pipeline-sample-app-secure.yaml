@@ -100,7 +100,7 @@ spec:
         - name: NEW_IMAGE
           value: $(params.APP_IMAGE)
         - name: KUSTOMIZATION_PATH
-          value: stage
+          value: apps/sample-app/stage
         - name: GIT_REVISION
           value: main
         - name: NEW_TAG
@@ -216,7 +216,7 @@ spec:
           value: roxsecrets
         - name: file-url
           value: >-
-            https://raw.githubusercontent.com/jstakun/openshift-gitops/main/sample-app/privileged-deployment.yaml
+            https://raw.githubusercontent.com/jstakun/openshift-gitops/main/apps/sample-app/base/privileged-deployment.yaml
       runAfter:
         - copy-image
       taskRef:

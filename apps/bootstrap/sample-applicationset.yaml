@@ -23,7 +23,7 @@ spec:
       source:
         repoURL: https://github.com/jstakun/openshift-gitops.git
         targetRevision: HEAD
-        path: '{{cluster}}'
+        path: 'apps/sample-app/{{cluster}}'
       destination:
         server: '{{url}}'
         namespace: sample-app-{{cluster}}
