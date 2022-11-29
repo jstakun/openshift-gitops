@@ -7,17 +7,9 @@ Initial setup
 ```
 oc edit cm argocd-rbac-cm -n openshift-gitops
 ```
-3. Create gitops-admins group in OCP
+3. Create gitops-admins group and app managment ArgoCD applications 
 ```
-oc create -f bootstrap/gitops-admins-group.yaml
-```
-4. Setup app managment ArgoCD applications 
-```
-oc create -f bootstrap/app-management-appproject.yaml
-oc create -f bootstrap/app-management-application.yaml
-oc create -f bootstrap/app-management-app-infra-applicationset.yaml
-oc create -f bootstrap/sealed-secrets-application.yaml
-oc create -f bootstrap/allure-application.yaml
+oc apply -k bootstrap/default/
 ```
 ---
 Sample application onboarding

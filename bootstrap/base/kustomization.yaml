@@ -1,0 +1,7 @@
+resources:
+- allure-application.yaml                       
+- app-management-appproject.yaml
+- app-management-app-infra-applicationset.yaml  
+- gitops-admins-group.yaml
+- app-management-application.yaml               
+- sealed-secrets-application.yaml
