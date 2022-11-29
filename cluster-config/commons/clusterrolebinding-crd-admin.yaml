@@ -1,7 +1,6 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
-  namespace: openshift-gitops
   name: crd-admin
 rules:
 - apiGroups: ["apiextensions.k8s.io"] 
@@ -18,7 +17,7 @@ subjects:
   name: openshift-gitops-argocd-application-controller
   namespace: openshift-gitops
 roleRef:
-  kind: Role 
+  kind: ClusterRole 
   name: crd-admin
   apiGroup: rbac.authorization.k8s.io
 
