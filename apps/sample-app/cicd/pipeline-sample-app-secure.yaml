@@ -137,7 +137,7 @@ spec:
         - name: FORMAT
           value: oci
         - name: BUILD_EXTRA_ARGS
-          value: '--build-arg MAVEN_MIRROR_URL=$(params.MAVEN_MIRROR_URL)'
+          value: '--squash --build-arg MAVEN_MIRROR_URL=$(params.MAVEN_MIRROR_URL)'
       runAfter:
         - sast-sonarqube-scanner
       taskRef:

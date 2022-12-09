@@ -132,6 +132,7 @@ spec:
           value: oci
         - name: BUILD_EXTRA_ARGS
           value: >-
+            --squash
             --build-arg
             MAVEN_MIRROR_URL=https://repo1.maven.org/maven2/
       runAfter:
