@@ -42,6 +42,7 @@ spec:
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
+      automountServiceAccountToken: "false"
       schedulerName: default-scheduler
   strategy:
     type: RollingUpdate
