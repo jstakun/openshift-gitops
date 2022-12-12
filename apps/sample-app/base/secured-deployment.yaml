@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: hello-quarkus
-          image: quay.io/jstakun/hello-quarkus-dev:0.1
+          image: quay.io/jstakun/hello-quarkus-dev:0.6
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -43,6 +43,7 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext: {}
       automountServiceAccountToken: false 
+      enableServiceLinks: false
       schedulerName: default-scheduler
   strategy:
     type: RollingUpdate
