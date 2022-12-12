@@ -2,7 +2,7 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: sample-app-stage-viewer
+  name: apps-sample-app-stage-viewer
   namespace: sample-app-stage
 subjects:
   - kind: Group
@@ -16,7 +16,7 @@ roleRef:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: sample-app-prod-viewer
+  name: apps-sample-app-prod-viewer
   namespace: sample-app-prod
 subjects:
   - kind: Group
@@ -30,7 +30,7 @@ roleRef:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: sample-app-test-viewer
+  name: apps-sample-app-test-viewer
   namespace: sample-app-test
 subjects:
   - kind: Group
@@ -44,7 +44,7 @@ roleRef:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: sample-app-cicd-viewer
+  name: apps-sample-app-cicd-viewer
   namespace: sample-app-cicd
 subjects:
   - kind: Group
