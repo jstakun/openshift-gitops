@@ -1,9 +1,10 @@
+commonLabels:
+  app: hello-quarkus
+#commonAnnotations:
+#  foo: bar
 resources:
 - deployment.yaml
 - service.yaml
 - secure-route.yaml
 - prometheus-service-monitor.yaml
 - network-policy.yaml
-#- rolebinding-view.yaml
-#- rolebinding-admin.yaml 
-#- sample-app-admins-group.yaml 
