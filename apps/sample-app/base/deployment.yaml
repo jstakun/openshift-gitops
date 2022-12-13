@@ -3,7 +3,6 @@ apiVersion: apps/v1
 metadata:
   name: hello-quarkus
   labels:
-    app: hello-quarkus
     app.kubernetes.io/component: hello-quarkus
     app.kubernetes.io/instance: hello-quarkus
     app.kubernetes.io/part-of: hello-quarkus-app
