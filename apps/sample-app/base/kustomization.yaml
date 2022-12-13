@@ -1,6 +1,6 @@
 commonLabels:
   app: hello-quarkus
-  createdBy: "jstakun/openshift-gitops"
+  createdBy: "jstakun-openshift-gitops"
 commonAnnotations:
   vcs-url: "https://github.com/jstakun/openshift-gitops"
 resources:
