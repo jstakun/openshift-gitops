@@ -11,16 +11,16 @@ metadata:
     app.openshift.io/runtime-namespace: hello-quarkus
 spec:
   replicas: 1
-  #  selector:
-  #  matchLabels:
-  #    app: hello-quarkus
+#   selector:
+#     matchLabels:
+#       app: hello-quarkus
   template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: hello-quarkus
-      annotations:
-        openshift.io/generated-by: OpenShiftWebConsole
+#   metadata:
+#      creationTimestamp: null
+#      labels:
+#        app: hello-quarkus
+#      annotations:
+#        openshift.io/generated-by: OpenShiftWebConsole
     spec:
       containers:
         - name: hello-quarkus
