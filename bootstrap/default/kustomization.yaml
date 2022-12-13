@@ -1,2 +1,6 @@
 bases:
-  - ../base/
+- ../base/
+commonLabels:
+- createdBy: "jstakun/openshift-gitops"
+commonAnnotations:
+- vcs-url: "https://github.com/jstakun/openshift-gitops"      
