@@ -1,0 +1,11 @@
+resources:
+- rolebinding-admin.yaml  
+- sample-app-admins-group.yaml  
+- sample-appproject.yaml
+- namespaces.yaml     
+- rolebinding-view.yaml   
+- sample-applicationset.yaml
+commonLabels:
+  createdBy: "jstakun/openshift-gitops"
+commonAnnotations:                
+  vcs-url: "https://github.com/jstakun/openshift-gitops" 
