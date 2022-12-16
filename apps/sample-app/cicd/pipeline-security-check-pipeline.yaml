@@ -2,6 +2,9 @@
 kind: Pipeline
 metadata:
   name: security-check
+  labels:
+    app: hello-quarkus
+    createdBy: "jstakun-openshift-gitops"          
 spec:
   params:
     - default: roxsecrets

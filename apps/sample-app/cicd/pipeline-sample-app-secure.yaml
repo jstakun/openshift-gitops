@@ -2,6 +2,9 @@
 kind: Pipeline
 metadata:
   name: sample-app-secure
+  labels:
+    app: hello-quarkus
+    createdBy: "jstakun-openshift-gitops"
 spec:
   params:
     - default: 'https://github.com/jstakun/quarkus-tracing.git'
