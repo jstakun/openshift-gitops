@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: hello-quarkus
   labels:
-    app: hello-quarkus 
+#   app: hello-quarkus 
     app.kubernetes.io/component: hello-quarkus
     app.kubernetes.io/instance: hello-quarkus
     app.kubernetes.io/part-of: hello-quarkus-app
@@ -16,11 +16,8 @@ spec:
 #       app: hello-quarkus
   template:
 #   metadata:
-#      creationTimestamp: null
 #      labels:
 #        app: hello-quarkus
-#      annotations:
-#        openshift.io/generated-by: OpenShiftWebConsole
     spec:
       containers:
         - name: hello-quarkus

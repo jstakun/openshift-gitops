@@ -17,5 +17,5 @@ subjects:
   namespace: openshift-gitops
 roleRef:
   kind: ClusterRole 
-  name: crd-admin
+  name: apps-crd-admin
   apiGroup: rbac.authorization.k8s.io

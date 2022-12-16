@@ -18,7 +18,7 @@ spec:
         value: password
   destination:
     server: https://kubernetes.default.svc
-    namespace: allure
+    namespace: apps-allure
   syncPolicy:
     syncOptions:     
     - CreateNamespace=true 
