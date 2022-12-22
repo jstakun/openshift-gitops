@@ -9,16 +9,20 @@ spec:
         matchLabels:
           kubernetes.io/metadata.name: openshift-user-workload-monitoring
       podSelector:
-        matchLabels:
-          app.kubernetes.io/instance: user-workload
-          app.kubernetes.io/name: prometheus
-          prometheus: user-workload
+        matchExpressions:
+          - key: app.kubernetes.io/name
+          operator: In
+          values:
+            - prometheus
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: openshift-ingress
       podSelector:
-        matchLabels:
-          ingresscontroller.operator.openshift.io/deployment-ingresscontroller: default
+        matchExpressions:
+          - key: ingresscontroller.operator.openshift.io/deployment-ingresscontroller
+          operator: In
+          values:
+            - default
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: sample-app-cicd
