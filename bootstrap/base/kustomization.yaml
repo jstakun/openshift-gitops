@@ -3,5 +3,6 @@ resources:
 - app-management-appproject.yaml
 - app-management-app-infra-applicationset.yaml  
 - gitops-admins-group.yaml
+- gitops-operator.yaml
 - app-management-application.yaml               
 - sealed-secrets-application.yaml

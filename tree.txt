@@ -72,7 +72,7 @@
 │   ├── crw                                                           --> CodeReady Workspaces (deprecated) operator  
 │   │   ├── 6-rhcrw-operator-che.yaml
 │   │   └── 6-rhcrw-operator.yaml
-│   ├── logging                                                       --> CLuster Logging + Loki operators 
+│   ├── logging                                                       --> Cluster Logging + Loki operators 
 │   │   ├── logging-operator-clusterlogging.yaml
 │   │   ├── logging-operator-logforwarding.yaml
 │   │   ├── logging-operator.yaml
