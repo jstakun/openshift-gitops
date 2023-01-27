@@ -19,11 +19,11 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: apps-allure
-  syncPolicy:
-    syncOptions:     
-    - CreateNamespace=true 
-    managedNamespaceMetadata:
-      annotations:
-        argocd.argoproj.io/sync: "true"
-      labels:
-        argocd.argoproj.io/managed-by: openshift-gitops     
+# syncPolicy:
+#   syncOptions:     
+#   - CreateNamespace=true 
+#   managedNamespaceMetadata:
+#     annotations:
+#       argocd.argoproj.io/sync: "true"
+#     labels:
+#       argocd.argoproj.io/managed-by: openshift-gitops     
