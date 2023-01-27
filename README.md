@@ -68,6 +68,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: quay-creds
+  namespace: sample-app-cicd
   annotations:
     tekton.dev/docker-0: 'https://quay.io'
 stringData:
@@ -94,6 +95,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: github-creds
+  namespace: sample-app-cicd
 stringData:
   .git-credentials: https://USERNAME:TOKEN@github.com
   .gitconfig: |
@@ -120,6 +122,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: roxsecrets
+  namespace: sample-app-cicd
 stringData:
   rox_api_token: API_TOKEN
   rox_central_endpoint: central.stackrox.svc.cluster.local:443
@@ -144,18 +147,20 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: crda
+  namespace: sample-app-cicd
 type: Opaque
 stringData:
   crda-key: {{CRDA_USER_KEY}}
 ```
 ---
-If you want to integrate with Sonar create following config map. Make sure to replace all SONAR_ placeholders and sonar.host.url properties with your settings.
+If you want to integrate with Sonar create following secret. Make sure to replace all SONAR_ placeholders and sonar.host.url properties with your settings.
 ```
-kind: ConfigMap
+kind: Secret
 apiVersion: v1
 metadata:
   name: sonar-properties
-data:
+  namespace: sample-app-cicd
+stringData:
   sonar-project.properties: |
     sonar.organization=SONAR_ORG
     sonar.login=SONAR_TOKEN
