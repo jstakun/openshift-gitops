@@ -48,7 +48,11 @@ spec:
     kind: ServiceMonitor 
   - group: 'networking.k8s.io'
     kind: NetworkPolicy  
- 
+  - group: ''
+    kind: LimitRange
+  - group: ''
+    kind: ResourceQuota  
+
   orphanedResources:
     warn: false
 

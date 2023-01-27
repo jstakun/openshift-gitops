@@ -23,26 +23,21 @@ Sample application onboarding
 
 Sample application manifests (namespace, role binding, ...) are stored in the [apps/bootstrap](https://github.com/jstakun/openshift-gitops/tree/main/apps/bootstrap) directory
 
-1. Synchronize apps-management application in ArgoCD UI/CLI
+1. Synchronize app-infra-commons application in ArgoCD UI/CLI
 
-2. Configure OpenShift [User Workload Monitoring](https://docs.openshift.com/container-platform/latest/monitoring/enabling-monitoring-for-user-defined-projects.html)
-```
-oc create -f cluster-config/commons/configmap-cluster-monitoring-config.yaml
-```
-3. Grant openshift-gitops service account permission to create service monitors in sample-app projects
-```
-oc create -f cluster-config/commons/clusterrolebinding-gitops-monitoring-edit.yaml
-```
-4. There are 2 role bindings created for each project with view and admin project roles which are bound to sample-app-viewers and sample-app-admins groups. If you want to use them you must create these groups
+This will enable user workload monitoring and will grant openshift-gitops service account permission to create service monitors in application projects
 
-5. Login to ArgoCD as sample-app-admins group member and sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
+2. Synchronize apps-management application in ArgoCD UI/CLI
+
+3. Synchronize app-infra-nexus and app-infra-pipelines applications in ArgoCD UI/CLI 
+
+4. Login to ArgoCD as sample-app-admins group member and sync sample-app-stage, sample-app-test, sample-app-prod and sample-app-cicd ArgoCD applications
 
 ---
+
 If you want to play with Tekton CI pipeline which has been installed in sample-app-cicd project here are additional steps to take:
 
-1. Install OpenShift Pipelines operator
-
-2. Setup image registry so that pipeline can push images to it and deployments can pull from it. Check below for sample quay.io setup.
+1. Setup image registry so that pipeline can push images to it and deployments can pull from it. Check below for sample quay.io setup.
 
 3. Setup git repository where you should clone this repo. Check below for sample github setup.
 
