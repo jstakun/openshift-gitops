@@ -132,7 +132,7 @@ type: Opaque
 ```
 cosign generate-key-pair k8s://sample-app-cicd/signing-secrets
 ```
-This command must be executed in context of your project where pipeline will be running so that signing secret is stored there and accessed by pipeline task when it will be executed
+Execute cosign command in the context of sample-app-cicd project so that signing secret is stored there and accessed by the pipeline task when it will be executed. You can later reuse this secret for signing other images.
 
 5. In order to execute dependency analysis install [CRDA CLI](https://github.com/fabric8-analytics/cli-tools/releases).
 
