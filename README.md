@@ -39,9 +39,9 @@ If you want to play with Tekton CI pipeline which has been installed in sample-a
 
 1. Setup image registry so that pipeline can push images to it and deployments can pull from it. Check below for sample quay.io setup.
 
-3. Setup git repository where you should clone this repo. Check below for sample github setup.
+2. Setup git repository where you should clone this repo. Check below for sample github setup.
 
-4. Increase resources for build container in buildah cluster task
+3. Increase resources for build container in buildah cluster task
 ```
 spec:
   steps:
@@ -54,7 +54,7 @@ spec:
           memory: 8Gi
           cpu: 4 
 ```
-5. Optionally modify maven mirror settings in maven-settings configmap to point to your maven repo
+4. Optionally modify maven mirror settings in maven-settings configmap to point to your maven repo
 
 ---
 If you want to use quay.io image registry to push images from the pipeline here are the steps to take:
@@ -107,7 +107,9 @@ type: Opaque
 ---
 If you want to test security pipelines following steps are required 
 
-1. Install [Advanced Cluster Security for Kubernetes](https://docs.openshift.com/acs/3.69/installing/install-ocp-operator.html) and configure it
+1. Synchronize app-infra-acs application in ArgoCD UI/CLI 
+
+This will install [Advanced Cluster Security for Kubernetes](https://docs.openshift.com/acs/3.69/installing/install-ocp-operator.html) 
 
 2. Generate API token with Continuous Integration role
 
@@ -162,13 +164,3 @@ data:
     sonar.projectKey=SONAR_PROJECT_KEY
     sonar.java.binaries=target
 ```
----
-If you want to deploy sample nexus repo you can use following deployment
-
-```
-oc create -f https://raw.githubusercontent.com/jstakun/openshift-cicd-demo/main/infra/nexus.yaml
-```
-Nexus url: http://nexus.sample-app-cicd.svc:8081/repository/maven-public/
-
----
-Run secure pipeline
