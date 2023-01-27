@@ -41,7 +41,7 @@ If you want to play with Tekton CI pipeline which has been installed in sample-a
 
 2. Setup git repository where you should clone this repo. Check below for sample github setup.
 
-3. Increase resources for build container in buildah cluster task
+3. (Optional) If build-image task fails you can increase resources for build-and-push step in buildah cluster task
 ```
 spec:
   steps:
@@ -54,7 +54,7 @@ spec:
           memory: 8Gi
           cpu: 4 
 ```
-4. Optionally modify maven mirror settings in maven-settings configmap to point to your maven repo
+4. (Optional) Modify maven mirror settings in maven-settings configmap to point to your local maven repo
 
 ---
 If you want to use quay.io image registry to push images from the pipeline here are the steps to take:
