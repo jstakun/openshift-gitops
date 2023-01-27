@@ -1,16 +1,20 @@
 # openshift-gitops
 Initial setup
 
-1. Install Gitops operator and create gitops-admins group and apps managment ArgoCD applications 
+1. Install Gitops operator 
 ```
-oc apply -k bootstrap/default/
+oc apply -f bootstrap/gitops/gitops-operator.yaml
 ```
-1.1 Approve Gitops operator creation
+2. Approve Gitops operator creation
 ```
 PLAN=$(oc get installplan -A | grep openshift-gitops-operator | awk '{print $2}')
 oc patch installplan $PLAN --namespace openshift-operators --type merge --patch '{"spec":{"approved":true}}'
 ```
-2. Edit argocd-rbac-cm config map in openshift-gitops project and set policy.default: ''
+3. Create gitops-admins group and cluster config ArgoCD applications
+```
+oc apply -k bootstrap/default/
+```
+4. Edit argocd-rbac-cm config map in openshift-gitops project and set policy.default: ''
 ```
 oc edit cm argocd-rbac-cm -n openshift-gitops
 ```
