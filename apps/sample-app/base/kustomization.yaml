@@ -9,3 +9,7 @@ resources:
 - secure-route.yaml
 - prometheus-service-monitor.yaml
 - network-policy.yaml
+- resource-quota-storage.yaml
+- resource-quota-timebound.yaml
+- resource-quota.yaml
+- limit-range.yaml  
