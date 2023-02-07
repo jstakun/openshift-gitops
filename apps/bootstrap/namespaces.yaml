@@ -58,5 +58,7 @@ metadata:
   name: sample-app-cicd
   annotations:
     argocd.argoproj.io/sync: "true"
+    operator.tekton.dev/prune.resources: "taskrun, pipelinerun"
+    operator.tekton.dev/prune.keep-since: 7200
   labels:
     argocd.argoproj.io/managed-by: openshift-gitops
