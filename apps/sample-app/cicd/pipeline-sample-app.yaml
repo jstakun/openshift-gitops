@@ -22,6 +22,9 @@ spec:
     - default: quay.io/jstakun/hello-quarkus-dev
       name: APP_IMAGE
       type: string
+    - default: sample-app
+      name: APP_NAME
+      type: string
   tasks:
     - name: git-clone
       params:
@@ -100,7 +103,7 @@ spec:
         - name: NEW_IMAGE
           value: $(params.APP_IMAGE)
         - name: KUSTOMIZATION_PATH
-          value: stage
+          value: apps/$(params.APP_NAME)/stage
         - name: GIT_REVISION
           value: main
         - name: NEW_TAG
@@ -135,8 +138,7 @@ spec:
           value: oci
         - name: BUILD_EXTRA_ARGS
           value: >-
-            --squash
-            --build-arg
+            --squash --build-arg
             MAVEN_MIRROR_URL=https://repo1.maven.org/maven2/
       runAfter:
         - unit-test
@@ -146,6 +148,21 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
+    - name: gitops-sync
+      params:
+        - name: application-name
+          value: $(params.APP_NAME)-stage
+        - name: revision
+          value: HEAD
+        - name: flags
+          value: '--insecure'
+        - name: argocd-version
+          value: v2.2.2
+      runAfter:
+        - git-update-deployment
+      taskRef:
+        kind: ClusterTask
+        name: argocd-task-sync-and-wait
   workspaces:
     - name: workspace
     - name: maven-settings

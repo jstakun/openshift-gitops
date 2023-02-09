@@ -1,5 +1,6 @@
 resources:
-- configmap-maven-settings.yaml         
+- configmap-maven-settings.yaml
+- configmap-argocd-env.yaml  
 - pipeline-security-check-pipeline.yaml           
 - task-rox-image-check.yaml
 - task-cosign.yaml                                
@@ -21,7 +22,12 @@ secretGenerator:
   - environment.properties
   options:
     disableNameSuffixHash: true
-
+- name: argocd-env-secret
+  envs: 
+  - argocd.properties 
+  options:
+    disableNameSuffixHash: true
+  
 #patchesJSON6902:
 #- target:
 #    version: v1
