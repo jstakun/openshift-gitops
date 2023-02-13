@@ -19,7 +19,7 @@ resources:
 secretGenerator:
 - name: roxsecrets
   envs:
-  - environment.properties
+  - rhacs.properties
   options:
     disableNameSuffixHash: true
 - name: argocd-env-secret
