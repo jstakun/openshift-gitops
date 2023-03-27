@@ -25,6 +25,9 @@ spec:
       containers:
         - name: hello-quarkus
           image: quay.io/jstakun/hello-quarkus-dev:latest
+          env:
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "abcdefg"
           ports:
             - containerPort: 8080
               protocol: TCP
