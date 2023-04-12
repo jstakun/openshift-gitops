@@ -11,7 +11,7 @@ spec:
         url: https://kubernetes.default.svc
       - operator: compliance
         url: https://kubernetes.default.svc
-      - operator: ods
+      - operator: spaces
         url: https://kubernetes.default.svc
       - operator: nexus
         url: https://kubernetes.default.svc
@@ -25,6 +25,10 @@ spec:
         url: https://kubernetes.default.svc
       - operator: commons
         url: https://kubernetes.default.svc   
+      - operator: terminal
+        url: https://kubernetes.default.svc
+      - operator: ods
+        url: https://kubernetes.default.svc  
   template:
     metadata:
       name: 'app-infra-{{operator}}'
