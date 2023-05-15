@@ -24,7 +24,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
-  channel: latest
+  channel: stable
   installPlanApproval: Manual
   name: rhacs-operator
   source: redhat-operators
