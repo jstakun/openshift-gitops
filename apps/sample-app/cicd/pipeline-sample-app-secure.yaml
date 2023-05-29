@@ -2,9 +2,9 @@
 kind: Pipeline
 metadata:
   name: sample-app-secure
+  namespace: sample-app-cicd
   labels:
     app: hello-quarkus
-    createdBy: "jstakun-openshift-gitops"
 spec:
   params:
     - default: 'https://github.com/jstakun/quarkus-tracing.git'
@@ -24,6 +24,9 @@ spec:
       type: string
     - default: 'http://nexus.apps-infra.svc:8081/repository/maven-public/'
       name: MAVEN_MIRROR_URL
+      type: string
+    - default: 'yes'
+      name: USE_SONARCLOUD
       type: string
   tasks:
     - name: git-clone
@@ -109,10 +112,7 @@ spec:
         - name: NEW_TAG
           value: $(params.APP_IMAGE_TAG)
       runAfter:
-        - acs-image-check
-        - acs-image-scan
-        - sign-image
-        - acs-deployment-check
+        - acs-netpol-generate
       taskRef:
         kind: Task
         name: git-update-deployment
@@ -200,7 +200,7 @@ spec:
         - name: cosignkey
           value: signing-secrets
         - name: image
-          value: '$(params.APP_IMAGE)@$(tasks.build-image.results.IMAGE_DIGEST)'
+          value: $(params.APP_IMAGE)@$(tasks.build-image.results.IMAGE_DIGEST)
         - name: namespace
           value: $(context.pipelineRun.namespace)
       runAfter:
@@ -234,11 +234,37 @@ spec:
       taskRef:
         kind: Task
         name: sonarqube-scanner
+      when:
+        - input: $(params.USE_SONARCLOUD)
+          operator: in
+          values:
+            - 'yes'
       workspaces:
         - name: source
           workspace: workspace
         - name: sonar-settings
           workspace: sonar-settings
+    - name: acs-netpol-generate
+      params:
+        - name: rox_central_endpoint
+          value: roxsecrets
+        - name: GIT_REPOSITORY
+          value: $(params.APP_MANIFESTS_GIT)
+        - name: APP_PATH
+          value: apps/sample-app/stage
+        - name: rox_api_token
+          value: roxsecrets
+      runAfter:
+        - acs-image-check
+        - acs-image-scan
+        - sign-image
+        - acs-deployment-check
+      taskRef:
+        kind: Task
+        name: rox-netpol-generate
+      workspaces:
+        - name: workspace
+          workspace: workspace
   workspaces:
     - name: workspace
     - name: maven-settings

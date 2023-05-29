@@ -1,0 +1,78 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: rox-netpol-generate
+spec:
+  params:
+    - description: >-
+        Secret containing the address:port tuple for RHACS Central (example -
+        rox.stackrox.io:443)
+      name: rox_central_endpoint
+      type: string
+    - description: Secret containing the RHACS API token with CI permissions
+      name: rox_api_token
+      type: string
+    - default: $(params.APP_MANIFESTS_GIT)
+      name: GIT_REPOSITORY
+      type: string
+    - default: .
+      name: APP_PATH
+      type: string
+  steps:
+    - image: 'docker.io/alpine/git:v2.32.0'
+      name: git-clone
+      resources: {}
+      script: |
+        rm -rf git-update-digest-workdir
+        git clone $(params.GIT_REPOSITORY) git-update-digest-workdir
+      workingDir: $(workspaces.workspace.path)
+    - image: 'k8s.gcr.io/kustomize/kustomize:v3.8.7'
+      name: kustomize
+      resources: {}
+      script: >
+        mkdir kustomized
+
+        /app/kustomize build git-update-digest-workdir/$(params.APP_PATH) -o
+        kustomized/kustomized.yaml
+
+        cat kustomized/kustomized.yaml
+      workingDir: $(workspaces.workspace.path)
+    - env:
+        - name: ROX_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: rox_api_token
+              name: $(params.rox_api_token)
+        - name: ROX_CENTRAL_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: rox_central_endpoint
+              name: $(params.rox_central_endpoint)
+      image: redhat/ubi8
+      name: rox-image-scan
+      resources: {}
+      script: >-
+        #!/usr/bin/env bash
+
+        set +x
+
+        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN"
+        https://$ROX_CENTRAL_ENDPOINT/api/cli/download/roxctl-linux --output
+        ./roxctl  > /dev/null; echo "Getting roxctl" 
+
+        chmod +x ./roxctl > /dev/null
+
+        ./roxctl generate netpol kustomized --output-file
+        generated-network-policies.yaml
+
+        echo "##################################" 
+
+        echo "### Generated network policies ###"
+
+        echo "##################################"
+
+        cat generated-network-policies.yaml 
+      workingDir: $(workspaces.workspace.path)
+  workspaces:
+    - description: The workspace consisting of maven project.
+      name: workspace
