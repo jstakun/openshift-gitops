@@ -6,7 +6,7 @@ commonAnnotations:
 resources:
 - deployment.yaml
 - service.yaml
-- secure-route.yaml
+- ingress.yaml
 - prometheus-service-monitor.yaml
 - network-policy.yaml
 - resource-quota-storage.yaml
