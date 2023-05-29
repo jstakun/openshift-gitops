@@ -2,7 +2,6 @@
 kind: Pipeline
 metadata:
   name: sample-app-secure
-  namespace: sample-app-cicd
   labels:
     app: hello-quarkus
 spec:
