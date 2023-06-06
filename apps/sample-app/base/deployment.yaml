@@ -34,7 +34,7 @@ spec:
               memory: 32Mi
           env:
             - name: REPO
-              value: nexus.apps-infra.svc.cluster.local:8081          
+              value: http://nexus.apps-infra.svc.cluster.local:8081          
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: IfNotPresent
