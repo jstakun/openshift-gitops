@@ -20,13 +20,13 @@ spec:
     - env:
         - name: COSIGN_EXPERIMENTAL
           value: '1'
-      image: 'gcr.io/projectsigstore/cosign:v1.13.1'
+      image: 'gcr.io/projectsigstore/cosign:v2.0.2'
       name: cosign
       resources: {}
       script: >
         #!/busybox/env /busybox/sh
 
-        CMD="cosign sign --key k8s://$(params.namespace)/$(params.cosignkey) $(params.image)"
+        CMD="cosign sign --key k8s://$(params.namespace)/$(params.cosignkey) --yes $(params.image)"
 
         echo "${CMD}"
         
