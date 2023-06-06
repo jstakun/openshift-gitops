@@ -33,11 +33,13 @@ spec:
               cpu: 100m
               memory: 32Mi
           env:
-            - name: REPO
+            - name: REPO_SERVICE_ADDR
               valueFrom:
                 configMapKeyRef:
                   name: repo-config 
-                  key: REPO_SERVICE_ADDR              
+                  key: REPO_SERVICE_ADDR
+            - name: API_SERVICE_ADDR
+              value: hello-quarkus.sample-app-stage:8080       
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: IfNotPresent
