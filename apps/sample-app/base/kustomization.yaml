@@ -12,4 +12,5 @@ resources:
 - resource-quota-storage.yaml
 - resource-quota-timebound.yaml
 - resource-quota.yaml
-- limit-range.yaml  
+- limit-range.yaml 
+- config-map.yaml  
