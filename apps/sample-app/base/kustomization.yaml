@@ -6,6 +6,7 @@ commonAnnotations:
 resources:
 - deployment.yaml
 - service.yaml
+- service-api.yaml
 - secured-route.yaml
 - prometheus-service-monitor.yaml
 - network-policy.yaml
