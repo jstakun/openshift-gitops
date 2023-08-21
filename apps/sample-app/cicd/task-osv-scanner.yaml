@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: osv-scanner
+spec:
+  params:
+    - default: /workspace/source
+      description: Path of target directory to perform analysis.
+      name: manifest-file-path
+      type: string
+    - default: osv-scanner.json
+      description: Path of the file to save analysis report.
+      name: output-file-path
+      type: string
+  steps:
+    - image: 'quay.io/jstakun/osv-scanner:1.3.6-alpine'
+      name: osv-scanner
+      resources: {}
+      script: >
+        #!/bin/sh
+
+        /root/osv-scanner --output $(params.output-file-path) -r
+        $(params.manifest-file-path)
+
+        if [ "$?" != 0 ] ; then
+          exit 1
+        fi
+
+        cat $(params.output-file-path)     
+      workingDir: /workspace/source
+  workspaces:
+    - name: source
+
