@@ -2,8 +2,6 @@
 kind: Pipeline
 metadata:
   name: sample-app-secure
-  labels:
-    app: hello-quarkus
 spec:
   params:
     - default: 'https://github.com/jstakun/quarkus-tracing.git'
@@ -26,6 +24,9 @@ spec:
       type: string
     - default: 'yes'
       name: USE_SONARCLOUD
+      type: string
+    - default: 'yes'
+      name: BUILD_IMAGE
       type: string
   tasks:
     - name: git-clone
@@ -69,6 +70,7 @@ spec:
           value: .
       runAfter:
         - sca-dependency-analysis
+        - sca-osv-scanner
       taskRef:
         kind: ClusterTask
         name: maven
@@ -145,6 +147,11 @@ spec:
       taskRef:
         kind: ClusterTask
         name: buildah
+      when:
+        - input: $(params.BUILD_IMAGE)
+          operator: in
+          values:
+            - 'yes'
       workspaces:
         - name: source
           workspace: workspace
@@ -258,11 +265,40 @@ spec:
         - acs-image-scan
         - sign-image
         - acs-deployment-check
+        - generate-sbom
       taskRef:
         kind: Task
         name: rox-netpol-generate
       workspaces:
         - name: workspace
+          workspace: workspace
+    - name: sca-osv-scanner
+      params:
+        - name: manifest-file-path
+          value: ./
+        - name: output-file-path
+          value: osv-scanner.json
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: Task
+        name: osv-scanner
+      workspaces:
+        - name: source
+          workspace: workspace
+    - name: generate-sbom
+      params:
+        - name: image
+          value: $(params.APP_IMAGE)
+        - name: output-format
+          value: json
+      runAfter:
+        - copy-image
+      taskRef:
+        kind: Task
+        name: generate-sbom
+      workspaces:
+        - name: source
           workspace: workspace
   workspaces:
     - name: workspace

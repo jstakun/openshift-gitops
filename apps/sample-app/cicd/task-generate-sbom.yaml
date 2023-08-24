@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: generate-sbom
+spec:
+  params:
+    - default: ''
+      description: Image to generate sbom.
+      name: image
+      type: string
+    - default: json
+      description: 'Output format as per https://github.com/anchore/syft'
+      name: output-format
+      type: string
+  steps:
+    - args:
+        - $(params.image)
+        - '--scope'
+        - all-layers
+        - '--output'
+        - $(params.output-format)
+      image: 'docker.io/anchore/syft:latest'
+      name: generate-sbom
+      resources: {}
+      workingDir: /workspace/source
+  workspaces:
+    - name: source
+
