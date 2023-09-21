@@ -49,7 +49,7 @@ spec:
     enabled: true
     clientAuthenticatorType: client-secret
     redirectUris:
-      - /oauth2callback/rh-sso
+      - /oauth2callback/*
     clientId: ocp-web-console
     implicitFlowEnabled: false
     secret: 5a77e831-bb79-43ca-9c58-082c9a09301f
