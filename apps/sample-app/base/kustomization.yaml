@@ -15,3 +15,4 @@ resources:
 - resource-quota.yaml
 - limit-range.yaml 
 - config-map.yaml  
+- pod-disruption-budget.yaml
