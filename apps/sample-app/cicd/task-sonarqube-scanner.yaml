@@ -75,7 +75,7 @@ spec:
         cat $(workspaces.source.path)/sonar-project.properties
 
     - name: sonar-scan
-      image: docker.io/sonarsource/sonar-scanner-cli:4
+      image: docker.io/sonarsource/sonar-scanner-cli:5
       workingDir: $(workspaces.source.path)
       command:
         - sonar-scanner
