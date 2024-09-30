@@ -8,8 +8,8 @@ spec:
       description: Image to generate sbom.
       name: image
       type: string
-    - default: json
-      description: 'Output format as per https://github.com/anchore/syft'
+    - default: spdx-json@2.2
+      description: 'Output format as per https://docs.redhat.com/en/documentation/red_hat_trusted_profile_analyzer/1/html/reference_guide/creating-an-sbom-manifest-file_ref'
       name: output-format
       type: string
   steps:
@@ -19,7 +19,7 @@ spec:
         - all-layers
         - '--output'
         - $(params.output-format)
-      image: 'docker.io/anchore/syft:latest'
+      image: 'registry.access.redhat.com/rh-syft-tech-preview/syft-rhel9:1.4.1'
       name: generate-sbom
       resources: {}
       workingDir: /workspace/source

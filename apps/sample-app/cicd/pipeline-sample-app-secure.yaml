@@ -291,7 +291,7 @@ spec:
         - name: image
           value: $(params.APP_IMAGE)
         - name: output-format
-          value: json
+          value: spdx-json@2.2
       runAfter:
         - copy-image
       taskRef:
